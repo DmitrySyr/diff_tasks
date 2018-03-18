@@ -15,7 +15,7 @@ script:
   - cmake --build . --target package
 deploy:
   provider: bintray
-  file: dpl.json
-  user: dmitrysyr
-  key: $BINTRAY_API_KEY
+  file: "dpl.json"
+  user: "dmitrysyr"
+  key: "$BINTRAY_API_KEY"
   skip_cleanup: true
