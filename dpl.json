@@ -1,0 +1,24 @@
+{
+    "package": {
+        "name": "helloworld",
+        "repo": "opus_tasks",
+        "subject": "dmitrysyr"
+    },
+
+    "version": {
+        "name": "1.0",
+        "desc": "First version of application",
+        "gpgSign": true
+    },
+
+    "files":
+        [{"includePattern": "./(.*\.deb)", "excludePattern": "\/.*\/(.*\.deb)", "uploadPattern": "pool/main/h/helloworld/$1",
+            "matrixParams": {
+                "deb_distribution": "stretch",
+                "deb_component": "main",
+                "deb_architecture": "amd64"
+            }
+        }
+        ],
+    "publish": true
+}

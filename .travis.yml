@@ -14,10 +14,9 @@ script:
   #- cmake --build . --target test
   - cmake --build . --target package
 deploy:
-  provider: script
+  provider: bintray
+  file: dpl.json
   user: dmitrysyr
   key: $BINTRAY_API_KEY
   passphrase: $PGPKEY
   skip_cleanup: true
-  script:
-  - curl -T helloworld-1.0.$TRAVIS_BUILD_NUMBER-Linux.deb -udmitrysyr:$BINTRAY_API_KEY "https://api.bintray.com/content/dmitrysyr/opus_tasks/helloworld/$TRAVIS_BUILD_NUMBER/helloworld-1.0.$TRAVIS_BUILD_NUMBER-Linux.deb;passphrase=;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
