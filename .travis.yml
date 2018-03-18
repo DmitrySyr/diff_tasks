@@ -18,5 +18,4 @@ deploy:
   file: dpl.json
   user: dmitrysyr
   key: $BINTRAY_API_KEY
-  passphrase: $PGPKEY
   skip_cleanup: true

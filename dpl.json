@@ -8,7 +8,7 @@
     "version": {
         "name": "1.0",
         "desc": "First version of application",
-        "gpgSign": true
+        "gpgSign": false
     },
 
     "files":
