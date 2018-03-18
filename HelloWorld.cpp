@@ -10,4 +10,3 @@ int main()
 	std::cout << "Hello, World! v." << version() << "\n";
     return 0;
 }
-
