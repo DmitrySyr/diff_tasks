@@ -18,22 +18,19 @@ configure_file (
   "${PROJECT_BINARY_DIR}/version.h"
   )
 
-set(SOURCE_PATH "${PROJECT_SOURCE_DIR}")
+#set(SOURCE_PATH "${PROJECT_SOURCE_DIR}")
 
 add_executable(allocator main.cpp )
 
-add_library(allocator_lib MyAlliocator.h MList.h)
+add_library(alllib pool_allocator.h m_list.h)
 
-target_link_libraries(allocator allocator_lib)
+target_link_libraries(allocator alllib)
 
-set_target_properties(
-  allocator
-  allocator_lib 
-
-  PROPERTIES
-    CXX_STANDARD 14
-    CXX_STANDARD_REQUIRED ON
-    COMPILE_OPTIONS -Wpedantic -Wall -Wextra
+set_target_properties(allocator alllib PROPERTIES
+  CXX_STANDARD 14
+  CXX_STANDARD_REQUIRED ON
+  LINKER_LANGUAGE CXX
+  COMPILE_OPTIONS -Wpedantic -Wall -Wextra
 )
 
 install(TARGETS allocator RUNTIME DESTINATION bin)
