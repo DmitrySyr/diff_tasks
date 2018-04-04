@@ -6,7 +6,7 @@ else()
     set(VERSION_BUILD 0)
 endif()
 
-project(allocator VERSION 0.0.${VERSION_BUILD} CXX)
+project(allocator VERSION 0.0.${VERSION_BUILD} LANGUAGES CXX)
 
 
 #set (PROJECT_VERSION_PATCH "1.0")
