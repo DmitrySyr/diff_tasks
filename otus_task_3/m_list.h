@@ -1,9 +1,14 @@
+#pragma once
+
+
 /*
 
 
 
 
 */
+
+#include <iostream>
 
 template<typename T>
 struct Node{
