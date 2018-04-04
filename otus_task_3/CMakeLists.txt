@@ -28,6 +28,8 @@ add_executable(allocator main.cpp )
 
 add_library(allocator_lib MyAlliocator.h MList.h)
 
+target_link_libraries(allocator allocator_lib)
+
 set_target_properties(
   allocator
   allocator_lib 
@@ -37,8 +39,6 @@ set_target_properties(
     CXX_STANDARD_REQUIRED ON
     COMPILE_OPTIONS -Wpedantic -Wall -Wextra
 )
-
-target_link_libraries(allocator allocator_lib)
 
 install(TARGETS allocator RUNTIME DESTINATION bin)
 
