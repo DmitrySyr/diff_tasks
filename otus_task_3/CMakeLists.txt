@@ -1,16 +1,12 @@
 cmake_minimum_required(VERSION 3.2)
 
-
-
 if($ENV{TRAVIS_BUILD_NUMBER})
     set(VERSION_BUILD $ENV{TRAVIS_BUILD_NUMBER})
 else()
     set(VERSION_BUILD 0)
 endif()
 
-
-
-project(allocator VERSION 0.0.${VERSION_BUILD})
+project(allocator VERSION 0.0.${VERSION_BUILD} CXX)
 
 
 #set (PROJECT_VERSION_PATCH "1.0")
