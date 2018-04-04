@@ -12,7 +12,7 @@ endif()
 
 project(allocator VERSION 0.0.${VERSION_BUILD})
 
-find_package(Boost COMPONENTS unit_test_framework REQUIRED)
+#find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
 # The version number.
 #set (PROJECT_VERSION_PATCH "1.0")
