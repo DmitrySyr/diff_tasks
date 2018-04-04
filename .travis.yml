@@ -7,7 +7,9 @@ before_script:
   - sudo apt-get update  
   - sudo apt-get install -qq g++-6 
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 60  
+  - echo $TRAVIS_BUILD_DIR
   - cd otus_task_3
+  - echo $TRAVIS_BUILD_DIR
 script:
   - cmake .
   - cmake --build .
@@ -16,4 +18,4 @@ deploy:
   provider: script
   skip_cleanup: true
   script:
-- curl -T allocator-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -udmitrysyr:$BINTRAY_API_KEY "https://api.bintray.com/content/dmitrysyr/diff_tasks/task_3/$TRAVIS_BUILD_NUMBER/allocator-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+  - curl -T allocator-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -udmitrysyr:$BINTRAY_API_KEY "https://api.bintray.com/content/dmitrysyr/diff_tasks/task_3/$TRAVIS_BUILD_NUMBER/allocator-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
