@@ -24,7 +24,7 @@ deploy:
     skip-cleanup: true
     github-token: $GH_TOKEN
     keep-history: true
-    local-dir: html
+    local-dir: otus_task_4/Doc/html
     on:
       branch: master
   - provider: script
