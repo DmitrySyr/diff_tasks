@@ -24,7 +24,7 @@ deploy:
     skip-cleanup: true
     github-token: $GH_TOKEN
     keep-history: true
-    local-dir: Doc/html
+    local-dir: html
     on:
       branch: master
   - provider: script
