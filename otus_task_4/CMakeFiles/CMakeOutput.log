@@ -15,28 +15,28 @@ The CXX compiler identification is GNU, found in "/home/travis/build/DmitrySyr/d
 Determining if the CXX compiler works passed with the following output:
 Change Dir: /home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_4ea81/fast"
-/usr/bin/make -f CMakeFiles/cmTC_4ea81.dir/build.make CMakeFiles/cmTC_4ea81.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_5cb95/fast"
+/usr/bin/make -f CMakeFiles/cmTC_5cb95.dir/build.make CMakeFiles/cmTC_5cb95.dir/build
 make[1]: Entering directory `/home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_4ea81.dir/testCXXCompiler.cxx.o
-/usr/bin/g++     -o CMakeFiles/cmTC_4ea81.dir/testCXXCompiler.cxx.o -c /home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX executable cmTC_4ea81
-/usr/local/cmake-3.9.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4ea81.dir/link.txt --verbose=1
-/usr/bin/g++       -rdynamic CMakeFiles/cmTC_4ea81.dir/testCXXCompiler.cxx.o  -o cmTC_4ea81 
+Building CXX object CMakeFiles/cmTC_5cb95.dir/testCXXCompiler.cxx.o
+/usr/bin/g++     -o CMakeFiles/cmTC_5cb95.dir/testCXXCompiler.cxx.o -c /home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_5cb95
+/usr/local/cmake-3.9.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5cb95.dir/link.txt --verbose=1
+/usr/bin/g++       -rdynamic CMakeFiles/cmTC_5cb95.dir/testCXXCompiler.cxx.o  -o cmTC_5cb95 
 make[1]: Leaving directory `/home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp'
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: /home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_9a637/fast"
-/usr/bin/make -f CMakeFiles/cmTC_9a637.dir/build.make CMakeFiles/cmTC_9a637.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_30a11/fast"
+/usr/bin/make -f CMakeFiles/cmTC_30a11.dir/build.make CMakeFiles/cmTC_30a11.dir/build
 make[1]: Entering directory `/home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_9a637.dir/CMakeCXXCompilerABI.cpp.o
-/usr/bin/g++     -o CMakeFiles/cmTC_9a637.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/cmake-3.9.2/share/cmake-3.9/Modules/CMakeCXXCompilerABI.cpp
-Linking CXX executable cmTC_9a637
-/usr/local/cmake-3.9.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9a637.dir/link.txt --verbose=1
-/usr/bin/g++      -v -rdynamic CMakeFiles/cmTC_9a637.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_9a637 
+Building CXX object CMakeFiles/cmTC_30a11.dir/CMakeCXXCompilerABI.cpp.o
+/usr/bin/g++     -o CMakeFiles/cmTC_30a11.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/cmake-3.9.2/share/cmake-3.9/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_30a11
+/usr/local/cmake-3.9.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_30a11.dir/link.txt --verbose=1
+/usr/bin/g++      -v -rdynamic CMakeFiles/cmTC_30a11.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_30a11 
 Using built-in specs.
 COLLECT_GCC=/usr/bin/g++
 COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper
@@ -48,9 +48,9 @@ Thread model: posix
 gcc version 7.2.0 (Ubuntu 7.2.0-1ubuntu1~14.04) 
 COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_9a637' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccrUSRog.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTC_9a637 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_9a637.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/7/crtend.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
-COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_9a637' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_30a11' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/cc0RRxzL.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTC_30a11 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_30a11.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/7/crtend.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_30a11' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
 make[1]: Leaving directory `/home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp'
 
 
@@ -58,14 +58,14 @@ Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_9a637/fast"]
-  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_9a637.dir/build.make CMakeFiles/cmTC_9a637.dir/build]
+  ignore line: [Run Build Command:"/usr/bin/make" "cmTC_30a11/fast"]
+  ignore line: [/usr/bin/make -f CMakeFiles/cmTC_30a11.dir/build.make CMakeFiles/cmTC_30a11.dir/build]
   ignore line: [make[1]: Entering directory `/home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp']
-  ignore line: [Building CXX object CMakeFiles/cmTC_9a637.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/usr/bin/g++     -o CMakeFiles/cmTC_9a637.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/cmake-3.9.2/share/cmake-3.9/Modules/CMakeCXXCompilerABI.cpp]
-  ignore line: [Linking CXX executable cmTC_9a637]
-  ignore line: [/usr/local/cmake-3.9.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9a637.dir/link.txt --verbose=1]
-  ignore line: [/usr/bin/g++      -v -rdynamic CMakeFiles/cmTC_9a637.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_9a637 ]
+  ignore line: [Building CXX object CMakeFiles/cmTC_30a11.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/bin/g++     -o CMakeFiles/cmTC_30a11.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/cmake-3.9.2/share/cmake-3.9/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTC_30a11]
+  ignore line: [/usr/local/cmake-3.9.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_30a11.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/g++      -v -rdynamic CMakeFiles/cmTC_30a11.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_30a11 ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/g++]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper]
@@ -77,13 +77,13 @@ Parsed CXX implicit link information from above output:
   ignore line: [gcc version 7.2.0 (Ubuntu 7.2.0-1ubuntu1~14.04) ]
   ignore line: [COMPILER_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-linux-gnu/7/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib/:/lib/x86_64-linux-gnu/:/lib/../lib/:/usr/lib/x86_64-linux-gnu/:/usr/lib/../lib/:/usr/lib/gcc/x86_64-linux-gnu/7/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_9a637' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/ccrUSRog.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTC_9a637 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_9a637.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/7/crtend.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_30a11' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/lib/gcc/x86_64-linux-gnu/7/collect2 -plugin /usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so -plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper -plugin-opt=-fresolution=/tmp/cc0RRxzL.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/ --build-id --eh-frame-hdr -m elf_x86_64 --hash-style=gnu --as-needed -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -z relro -o cmTC_30a11 /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crt1.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o /usr/lib/gcc/x86_64-linux-gnu/7/crtbegin.o -L/usr/lib/gcc/x86_64-linux-gnu/7 -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu -L/usr/lib/gcc/x86_64-linux-gnu/7/../../../../lib -L/lib/x86_64-linux-gnu -L/lib/../lib -L/usr/lib/x86_64-linux-gnu -L/usr/lib/../lib -L/usr/lib/gcc/x86_64-linux-gnu/7/../../.. CMakeFiles/cmTC_30a11.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-linux-gnu/7/crtend.o /usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crtn.o]
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/lib/gcc/x86_64-linux-gnu/7/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ccrUSRog.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/cc0RRxzL.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -101,7 +101,7 @@ Parsed CXX implicit link information from above output:
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-zrelro] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_9a637] ==> ignore
+    arg [cmTC_30a11] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crt1.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/../../../x86_64-linux-gnu/crti.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-linux-gnu/7/crtbegin.o] ==> ignore
@@ -113,7 +113,7 @@ Parsed CXX implicit link information from above output:
     arg [-L/usr/lib/x86_64-linux-gnu] ==> dir [/usr/lib/x86_64-linux-gnu]
     arg [-L/usr/lib/../lib] ==> dir [/usr/lib/../lib]
     arg [-L/usr/lib/gcc/x86_64-linux-gnu/7/../../..] ==> dir [/usr/lib/gcc/x86_64-linux-gnu/7/../../..]
-    arg [CMakeFiles/cmTC_9a637.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTC_30a11.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -141,14 +141,14 @@ Parsed CXX implicit link information from above output:
 Detecting CXX [-std=c++1z] compiler features compiled with the following output:
 Change Dir: /home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_63886/fast"
-/usr/bin/make -f CMakeFiles/cmTC_63886.dir/build.make CMakeFiles/cmTC_63886.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_c5626/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c5626.dir/build.make CMakeFiles/cmTC_c5626.dir/build
 make[1]: Entering directory `/home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_63886.dir/feature_tests.cxx.o
-/usr/bin/g++    -std=c++1z -o CMakeFiles/cmTC_63886.dir/feature_tests.cxx.o -c /home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_63886
-/usr/local/cmake-3.9.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_63886.dir/link.txt --verbose=1
-/usr/bin/g++       -rdynamic CMakeFiles/cmTC_63886.dir/feature_tests.cxx.o  -o cmTC_63886 
+Building CXX object CMakeFiles/cmTC_c5626.dir/feature_tests.cxx.o
+/usr/bin/g++    -std=c++1z -o CMakeFiles/cmTC_c5626.dir/feature_tests.cxx.o -c /home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_c5626
+/usr/local/cmake-3.9.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c5626.dir/link.txt --verbose=1
+/usr/bin/g++       -rdynamic CMakeFiles/cmTC_c5626.dir/feature_tests.cxx.o  -o cmTC_c5626 
 make[1]: Leaving directory `/home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp'
 
 
@@ -214,14 +214,14 @@ make[1]: Leaving directory `/home/travis/build/DmitrySyr/diff_tasks/otus_task_4/
 Detecting CXX [-std=c++14] compiler features compiled with the following output:
 Change Dir: /home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_29528/fast"
-/usr/bin/make -f CMakeFiles/cmTC_29528.dir/build.make CMakeFiles/cmTC_29528.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_83d6d/fast"
+/usr/bin/make -f CMakeFiles/cmTC_83d6d.dir/build.make CMakeFiles/cmTC_83d6d.dir/build
 make[1]: Entering directory `/home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_29528.dir/feature_tests.cxx.o
-/usr/bin/g++    -std=c++14 -o CMakeFiles/cmTC_29528.dir/feature_tests.cxx.o -c /home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_29528
-/usr/local/cmake-3.9.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_29528.dir/link.txt --verbose=1
-/usr/bin/g++       -rdynamic CMakeFiles/cmTC_29528.dir/feature_tests.cxx.o  -o cmTC_29528 
+Building CXX object CMakeFiles/cmTC_83d6d.dir/feature_tests.cxx.o
+/usr/bin/g++    -std=c++14 -o CMakeFiles/cmTC_83d6d.dir/feature_tests.cxx.o -c /home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_83d6d
+/usr/local/cmake-3.9.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_83d6d.dir/link.txt --verbose=1
+/usr/bin/g++       -rdynamic CMakeFiles/cmTC_83d6d.dir/feature_tests.cxx.o  -o cmTC_83d6d 
 make[1]: Leaving directory `/home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp'
 
 
@@ -287,14 +287,14 @@ make[1]: Leaving directory `/home/travis/build/DmitrySyr/diff_tasks/otus_task_4/
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
 Change Dir: /home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_f9a6d/fast"
-/usr/bin/make -f CMakeFiles/cmTC_f9a6d.dir/build.make CMakeFiles/cmTC_f9a6d.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_13295/fast"
+/usr/bin/make -f CMakeFiles/cmTC_13295.dir/build.make CMakeFiles/cmTC_13295.dir/build
 make[1]: Entering directory `/home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_f9a6d.dir/feature_tests.cxx.o
-/usr/bin/g++    -std=c++11 -o CMakeFiles/cmTC_f9a6d.dir/feature_tests.cxx.o -c /home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_f9a6d
-/usr/local/cmake-3.9.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f9a6d.dir/link.txt --verbose=1
-/usr/bin/g++       -rdynamic CMakeFiles/cmTC_f9a6d.dir/feature_tests.cxx.o  -o cmTC_f9a6d 
+Building CXX object CMakeFiles/cmTC_13295.dir/feature_tests.cxx.o
+/usr/bin/g++    -std=c++11 -o CMakeFiles/cmTC_13295.dir/feature_tests.cxx.o -c /home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_13295
+/usr/local/cmake-3.9.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_13295.dir/link.txt --verbose=1
+/usr/bin/g++       -rdynamic CMakeFiles/cmTC_13295.dir/feature_tests.cxx.o  -o cmTC_13295 
 make[1]: Leaving directory `/home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp'
 
 
@@ -360,14 +360,14 @@ make[1]: Leaving directory `/home/travis/build/DmitrySyr/diff_tasks/otus_task_4/
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
 Change Dir: /home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_0c3d7/fast"
-/usr/bin/make -f CMakeFiles/cmTC_0c3d7.dir/build.make CMakeFiles/cmTC_0c3d7.dir/build
+Run Build Command:"/usr/bin/make" "cmTC_c5526/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c5526.dir/build.make CMakeFiles/cmTC_c5526.dir/build
 make[1]: Entering directory `/home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_0c3d7.dir/feature_tests.cxx.o
-/usr/bin/g++    -std=c++98 -o CMakeFiles/cmTC_0c3d7.dir/feature_tests.cxx.o -c /home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_0c3d7
-/usr/local/cmake-3.9.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0c3d7.dir/link.txt --verbose=1
-/usr/bin/g++       -rdynamic CMakeFiles/cmTC_0c3d7.dir/feature_tests.cxx.o  -o cmTC_0c3d7 
+Building CXX object CMakeFiles/cmTC_c5526.dir/feature_tests.cxx.o
+/usr/bin/g++    -std=c++98 -o CMakeFiles/cmTC_c5526.dir/feature_tests.cxx.o -c /home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_c5526
+/usr/local/cmake-3.9.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c5526.dir/link.txt --verbose=1
+/usr/bin/g++       -rdynamic CMakeFiles/cmTC_c5526.dir/feature_tests.cxx.o  -o cmTC_c5526 
 make[1]: Leaving directory `/home/travis/build/DmitrySyr/diff_tasks/otus_task_4/CMakeFiles/CMakeTmp'
 
 
