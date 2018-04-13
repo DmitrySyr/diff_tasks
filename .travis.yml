@@ -19,6 +19,7 @@ script:
   - cmake --build . --target test
   - cmake --build . --target package
   - doxygen
+
 deploy:
   - provider: pages
     skip-cleanup: true
