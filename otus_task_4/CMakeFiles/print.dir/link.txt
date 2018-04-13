@@ -1,1 +1,0 @@
-/usr/bin/g++    -rdynamic CMakeFiles/print.dir/main.cpp.o  -o print libprint_lib.a 

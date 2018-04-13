@@ -1,2 +1,0 @@
-/usr/bin/ar qc libprint_lib.a  
-/usr/bin/ranlib libprint_lib.a
