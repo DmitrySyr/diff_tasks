@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <vector>
+#include <memory>
 
 /*
 
@@ -31,7 +32,7 @@ private:
 
     std::vector<T*> free_ptrs;     // складываем указатели на свободное местро в пуле
 
-    std::vector<T*> basics;        // складываем указатели на выделенные блоки, чтобы освобождать в деструкторе
+    std::vector<std::unique_ptr<T*>> basics;        // складываем указатели на выделенные блоки, чтобы освобождать в деструкторе
 
     size_t size_ = 0;
 
@@ -42,13 +43,13 @@ private:
         //std::cout << "Выделяем память под объекты в количестве: " << n
        // << " штук, всего выделено " << (sizeof(T) * n) << " байт\n";
 
-        if (n == 0) return NULL;
+        if (n == 0) return nullptr;
 
         if (n > max_size()) throw std::length_error("Численное переполнение при запросе памяти.\n");
 
         void * const pv = malloc(n * sizeof(T));
 
-        if (pv == NULL) throw std::bad_alloc();
+        if (pv == nullptr) throw std::bad_alloc();
 
         return static_cast<T*>(pv);
     }
@@ -77,6 +78,11 @@ public:
 
     //===================================================================
 
+    size_t get_size() const {
+
+        return size_;
+    }
+
     template<typename U>
     struct rebind{
         using other = MyAlliocator<U, Lim>;
@@ -90,6 +96,11 @@ public:
     size_t size() const {
 
         return size_;
+    }
+
+    size_t aviable_pool_size() const {
+
+        return free_ptrs.size();
     }
 
 
@@ -111,32 +122,32 @@ public:
         if(Lim != 1) {
 
             free_ptrs.reserve(Lim);
-            basics. reserve(1);
+            basics.reserve(1);
         }
     }
 
-    MyAlliocator(const MyAlliocator& other)
+    MyAlliocator(const MyAlliocator& other) = delete;
 
-    : free_ptrs{other.free_ptrs}, basics{other.basics}, size_{other.size_}
-    {
+//    : free_ptrs{other.free_ptrs}, basics{other.basics}, size_{other.size_}
+//    {
+//
+//    }
 
-    }
 
-
-    template<typename U>
-    MyAlliocator(const MyAlliocator<U>& other){}
+//    template<typename U>
+//    MyAlliocator(const MyAlliocator<U>& other){}
 
     MyAlliocator& operator==(const MyAlliocator&) = delete;
 
     ~MyAlliocator() {
-        while(!basics.empty()) {
-
-            ::free(basics.back());
-
-            //std::cout << "Освободили в деструкторе " << Lim * sizeof(T) << " байт.\n";
-
-            basics.pop_back();
-        }
+//        while(!basics.empty()) {
+//
+//            ::free(basics.back());
+//
+//            //std::cout << "Освободили в деструкторе " << Lim * sizeof(T) << " байт.\n";
+//
+//            basics.pop_back();
+//        }
     }
 
     // ======================== конструирование и деконструкция ========
@@ -181,13 +192,13 @@ public:
            if(basics.empty() || free_ptrs.empty()) {
 
             if(free_ptrs.empty()) free_ptrs.reserve(Lim);
-           else free_ptrs.reserve(free_ptrs.size() + Lim);
+            else free_ptrs.reserve(free_ptrs.size() + Lim);
 
             ptr = alloc_helper(Lim);
 
             init_block(ptr);
 
-            basics.push_back(ptr);
+            basics.push_back( std::make_unique<T*>(ptr) );
            }
 
             //std::cout << "Выделяем память в пуле в размере " << sizeof(T) << " байт.\n";

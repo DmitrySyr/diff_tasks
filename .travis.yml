@@ -3,32 +3,21 @@ sudo: required
 language: cpp
 
 before_script:
-  - sudo apt-get install libboost-test-dev -y
-  # Add repository for GCC 7
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-  - sudo apt-get update -qq
-  - sudo apt-get install graphviz
-  - sudo apt-get install doxygen
-  - cd otus_task_4
-script:
-  # Install GCC 7 and Boost Test Framework 1.54
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test 
+  - sudo apt-get update  
+  - sudo apt-get install -qq g++-7 
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 70  
   - sudo apt-get install -y -qq g++-7 libboost-test1.54-dev
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 90
+  - echo $TRAVIS_BUILD_DIR
+  - cd otus_task_3
+ 
+script:
   - cmake .
   - cmake --build .
   - cmake --build . --target test
   - cmake --build . --target package
-  - doxygen
-
 deploy:
-  - provider: pages
-    skip-cleanup: true
-    github-token: $GH_TOKEN
-    keep-history: true
-    local-dir: otus_task_4/html
-    on:
-      branch: master
-  - provider: script
-    skip_cleanup: true
-    script:
-    - curl -T print_ip-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -udmitrysyr:$BINTRAY_API_KEY "https://api.bintray.com/content/dmitrysyr/diff_tasks/task_4/$TRAVIS_BUILD_NUMBER/print_ip-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+  provider: script
+  skip_cleanup: true
+  script:
+  - curl -T allocator-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -udmitrysyr:$BINTRAY_API_KEY "https://api.bintray.com/content/dmitrysyr/diff_tasks/task_3/$TRAVIS_BUILD_NUMBER/allocator-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"

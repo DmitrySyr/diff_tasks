@@ -37,24 +37,23 @@ private:
     Alloc alloc_;
 
 public:
+    //types
 
-    // конструкторы
-    MList() = default;
-//    : head{alloc_.allocate(1)} {
-//        alloc_.construct(head);
-//    }
-
-    MList(const MList& other) = delete;
-    MList<T>& operator=(const MList&) = delete;
-
-    ~MList() {
-        if(size_)
-            clear();
-    }
+    using value_type = T;
+    using pointer = T*;
+    using reference = T&;
+    using difference_type = ptrdiff_t;
 
     // итератор
 
-    class iterator {
+    class iterator : public std::iterator<
+                                            std::forward_iterator_tag
+                                            , Node<T>
+                                            , std::ptrdiff_t
+                                            , Node<T>*
+                                            , Node<T>&
+                                        >
+    {
         public:
             iterator();
             T& operator*();
@@ -78,16 +77,54 @@ public:
     size_t size() const;
     bool empty() const;
 
-    void push(const T& val );
-    void push(T && val );
+    void push_front(const T& val );
+    void push_front(T && val );
 
-    void pop();
+    void pop_front();
 
     void clear();
 
 
     iterator begin();
     iterator end();
+
+    const Alloc& get_allocator() const {
+
+        return alloc_;
+    }
+
+    // конструкторы
+    MList() = default;
+
+    MList(MList& other) {
+
+
+        for(auto it = other.begin(); it != other.end(); ++it) {
+
+            push_front(*it);
+        }
+
+        size_ = other.size_;
+    }
+
+    MList<T>& operator=(const MList& other){
+
+        this -> clear();
+
+        for( auto it = other.begin(); it != other.end(); ++it ) {
+
+            push_front(*it);
+            ++size_;
+        }
+
+        return *this;
+    }
+
+    ~MList() {
+        if(size_)
+            clear();
+    }
+
 };
 
 // =========================================================================
@@ -162,13 +199,13 @@ bool MList<T, Alloc>::empty() const  {
 template<typename T, typename Alloc>
 void MList<T, Alloc>::clear()  {
 	while( !empty() )  {
-		pop();
+		pop_front();
 	}
 }
 
 
 template<typename T, typename Alloc>
-void MList<T, Alloc>::push(const T& val )  {
+void MList<T, Alloc>::push_front(const T& val )  {
 
 	auto ptr = alloc_.allocate(1);
 	alloc_.construct(ptr, Node<T>());
@@ -182,15 +219,15 @@ void MList<T, Alloc>::push(const T& val )  {
 }
 
 template<typename T, typename Alloc>
-void MList<T, Alloc>::push( T && val )  {
+void MList<T, Alloc>::push_front( T && val )  {
 
     auto tmp = T();
     std::swap(tmp, val);
-	push(tmp);
+	push_front(tmp);
 }
 
 template<typename T, typename Alloc>
-void MList<T, Alloc>::pop()  {
+void MList<T, Alloc>::pop_front()  {
 
 	if(!head) return;
 
