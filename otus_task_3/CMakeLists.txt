@@ -8,6 +8,7 @@ endif()
 
 project(allocator VERSION 0.0.${VERSION_BUILD} LANGUAGES CXX)
 
+find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
 #set (PROJECT_VERSION_PATCH "1.0")
 
@@ -55,3 +56,7 @@ set(CPACK_PACKAGE_CONTACT dmitry.syr@gmail.com)
 include (CPack)
 
 enable_testing()
+
+add_test(test_fact_func allocator_tests)
+add_test(test_suite_m_list allocator_tests)
+add_test(test_allocator allocator_tests)
