@@ -57,3 +57,5 @@ set(CPACK_PACKAGE_CONTACT dmitry.syr@gmail.com)
 include (CPack)
 
 enable_testing()
+
+add_test(test_printing_ip print_ip_test)

@@ -43,7 +43,7 @@ std::stringstream ss;
     struct helper
     {
         template<typename T>
-        void operator()(T& t) const { PRNT::print((T)t); }
+        void operator()(T& t) const { HW4::print((T)t); }
     };
 
     template<std::size_t I = 0, typename FuncT, typename... Tp>
@@ -64,18 +64,18 @@ BOOST_AUTO_TEST_CASE(test_integrals) {
 
 
   std::tuple<char, char, short, short, short, int, int, long, long, long> Ask{
-					char(-1)
-					,char(128)
-					,(short)0
-					,(short)-32640
-					,(short)-1
+					static_cast<char>( -1 )
+					,static_cast<char>( 128 )
+					,static_cast<short>( 0 )
+					,static_cast<short>( -32640 )
+					,static_cast<short>( -1 )
 
-					,(int)2130706433
-					,(int)-255
+					,static_cast<int>( 2130706433 )
+					,static_cast<int>( -255 )
 
-					,(long)3321954815
-					,(long)8319119876597776512
-					,(long)-2139062144
+					,static_cast<long>( 3321954815 )
+					,static_cast<long>( 8319119876597776512 )
+					,static_cast<long>( -2139062144 )
 				};
 
   const std::vector<std::string> Answering{
@@ -94,7 +94,7 @@ BOOST_AUTO_TEST_CASE(test_integrals) {
                     ,"255.255.255.255.128.128.128.128"
 					};
 
-  for(const auto& i : std::vector<size_t>{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}) {
+  for(const auto& i : {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}) {
 
 
     {
@@ -162,7 +162,7 @@ BOOST_AUTO_TEST_CASE(test_containers) {
 
     {
         cout_redirect guard( ss.rdbuf() );
-        PRNT::print(el);
+        HW4::print(el);
 
     }
 
@@ -179,7 +179,7 @@ BOOST_AUTO_TEST_CASE(test_containers) {
 
     {
         cout_redirect guard( ss.rdbuf() );
-        PRNT::print(el);
+        HW4::print(el);
 
     }
 
@@ -196,7 +196,7 @@ BOOST_AUTO_TEST_CASE(test_containers) {
 
     {
         cout_redirect guard( ss.rdbuf() );
-        PRNT::print(el);
+        HW4::print(el);
 
     }
 
@@ -213,7 +213,7 @@ BOOST_AUTO_TEST_CASE(test_containers) {
 
     {
         cout_redirect guard( ss.rdbuf() );
-        PRNT::print(el);
+        HW4::print(el);
 
     }
 
@@ -242,7 +242,7 @@ BOOST_AUTO_TEST_CASE(test_tuples) {
 
 
   {     cout_redirect guard( ss.rdbuf() );
-        PRNT::print(ask_0);
+        HW4::print(ask_0);
   }
 
   BOOST_CHECK_EQUAL( ss.str(), "a" );
@@ -250,7 +250,7 @@ BOOST_AUTO_TEST_CASE(test_tuples) {
 
   //-------------------------------------
   {     cout_redirect guard( ss.rdbuf() );
-        PRNT::print(ask_1);
+        HW4::print(ask_1);
   }
 
   BOOST_CHECK_EQUAL( ss.str(), ans );
@@ -258,7 +258,7 @@ BOOST_AUTO_TEST_CASE(test_tuples) {
 
   //-------------------------------------
   {     cout_redirect guard( ss.rdbuf() );
-        PRNT::print(ask_2);
+        HW4::print(ask_2);
   }
 
   BOOST_CHECK_EQUAL( ss.str(), ans );
@@ -266,7 +266,7 @@ BOOST_AUTO_TEST_CASE(test_tuples) {
 
   //-------------------------------------
   {     cout_redirect guard( ss.rdbuf() );
-        PRNT::print(ask_3);
+        HW4::print(ask_3);
   }
 
   BOOST_CHECK_EQUAL( ss.str(), ans );
@@ -274,11 +274,45 @@ BOOST_AUTO_TEST_CASE(test_tuples) {
 
   //-------------------------------------
   {     cout_redirect guard( ss.rdbuf() );
-        PRNT::print(ask_4);
+        HW4::print(ask_4);
   }
 
   BOOST_CHECK_EQUAL( ss.str(), ans );
   ss.str(std::string());
+
+}
+
+BOOST_AUTO_TEST_CASE(test_cont_cont_numbers) {
+
+
+  std::vector<std::list<int>> ask_0 {
+                                    {198, 128, 0, 1}
+                                    , {255, 255, 255, 0}
+  };
+
+
+  {     cout_redirect guard( ss.rdbuf() );
+        HW4::print( ask_0 );
+  }
+
+  BOOST_CHECK_EQUAL( ss.str(), "198.128.0.1\n255.255.255.0\n" );
+  ss.str(std::string());
+
+  //-------------------------------------
+  std::list<std::vector<int>> ask_1 {
+                                    {198, 128, 0, 1}
+                                    , {255, 255, 255, 0}
+                                    };
+
+  {     cout_redirect guard( ss.rdbuf() );
+        HW4::print(ask_1);
+  }
+
+    BOOST_CHECK_EQUAL( ss.str(), "198.128.0.1\n255.255.255.0\n" );
+  ss.str(std::string());
+
+  //-------------------------------------
+
 
 }
 

@@ -7,62 +7,104 @@
 #include <algorithm>
 #include <tuple>
 #include <iostream>
+#include <array>
 
 
-namespace PRNT{
-
-    template <typename T, bool, bool >
-    class print_ip {};
+namespace HW4{
 
 
-    template <>
-    class print_ip<std::string, false, true>{
-
-    public:
-
-        static void print_pr(const std::string& str) {
-
-            std::cout << str;
-        }
-
-    };
+    //------------------------------------------------------
 
     template <typename T>
-    class print_ip<T, false, true>{
+    struct is_container{
 
-    public:
+        static const bool value = false;
+    };
 
-        static void print_pr(const T& vec) {
+    template <typename T, typename Alloc>
+    struct is_container<std::vector<T, Alloc>>{
 
-            for(auto it = vec.begin(); it != vec.end(); ++it) {
+        static const bool value = true;
+    };
 
-                if(it != vec.begin()){
-                    std::cout << ".";
-                }
 
-                std::cout << *it;
+    template <typename T, typename Alloc>
+    struct is_container<std::list<T, Alloc>>{
+
+        static const bool value = true;
+    };
+
+    //------------------------------------------------------
+
+    template <typename  T>
+    struct is_tuple{
+
+        static const bool value = false;
+    };
+
+    template <typename ... Tp>
+    struct is_tuple<std::tuple<Tp...> >{
+
+        static const bool value = true;
+    };
+    //------------------------------------------------------
+
+    template <  typename T
+              , typename std::enable_if<!( is_container<T>::value || is_tuple<T>::value || std::is_integral<T>::value ), int>::type = 0
+              >
+    auto print_ip(const T& str) {
+
+        std::cout << str;
+    }
+
+    template <  typename T
+              , typename std::enable_if<is_container<T>::value, int>::type = 0
+              , typename std::enable_if<!(
+                                         is_container<typename T::value_type>::value
+                                         || is_tuple<typename T::value_type>::value
+                                         ), int>::type = 0
+              >
+
+    auto print_ip(const T& vec) {
+
+        for(auto it = vec.begin(); it != vec.end(); ++it) {
+
+            if(it != vec.begin()){
+                std::cout << ".";
             }
+
+            std::cout << *it;
         }
+    }
 
-    };
+    template <  typename T
+              , typename std::enable_if<is_container<T>::value, int>::type = 0
+              , typename std::enable_if<(
+                                         is_container<typename T::value_type>::value
+                                         || is_tuple<typename T::value_type>::value
+                                         )
+                                         , int>::type = 0
+              >
+    auto print_ip(const T& vec) {
+
+        for(auto it = vec.begin(); it != vec.end(); ++it) {
+
+            print_ip( *it ); std::cout << "\n";
+        }
+    }
 
 
-    template <typename T>
-    class print_ip<T, true, false>{
+    template <typename T, typename std::enable_if<std::is_integral<T>::value, int>::type = 0>
+    auto print_ip(const T& t) {
 
-    public:
+        auto tmp = t;
+            std::array<int, sizeof(T)> vec;
 
-
-        static void print_pr(const T& t) {
-
-            auto tmp = t;
-            std::vector<int> vec;
-            vec.reserve(sizeof(T));
             size_t count_ = 1;
 
             while(true) {
 
-                vec.push_back((tmp&255));
+                vec[count_ - 1] = ( ( tmp&255 ) );
                 if(count_ < sizeof(T)) {
                     tmp = tmp >> 8;
                     ++count_;
@@ -82,73 +124,29 @@ namespace PRNT{
 
                 std::cout << *it;
             }
-        }
-    };
-
-    //==================================================================
-
-    template<size_t I = 0, typename... Tp>
-    typename std::enable_if<I == sizeof...(Tp), void>::type
-    print(const std::tuple<Tp...>& t)
-    { }
-
-    template<size_t I = 0, typename... Tp>
-    typename std::enable_if<I < sizeof...(Tp), void>::type
-    print(const std::tuple<Tp...>& t)
-    {
-        if(I != 0) {
-            std::cout << ".";
-        }
-        std::cout << std::get<I>(t);
-        print<I + 1, Tp...>(t);
     }
 
-
-    template <typename ... Tp>
-    class print_ip<std::tuple<Tp...>, true, false> {
-
-    public:
-
-        static void print_pr(const std::tuple<Tp...>& t) {
-
-            print(t);
-        }
-    };
-
-
     //------------------------------------------------------
-    template <typename T>
-    struct is_container{
-
-        static const bool value = false;
-    };
-
-    template <typename T, typename Alloc>
-    struct is_container<std::vector<T, Alloc>>{
-
-        static const bool value = true;
-    };
 
 
-     template <>
-    struct is_container<std::string>{
+    template < typename T, size_t ... I>
+    auto print_tuple_helper( const T& tp, std::index_sequence<I...> ) {
 
-        static const bool value = true;
-    };
+        ((std::cout << (I == 0 ? "" : ".") << std::get<I>(tp)), ...);
+    }
 
-     template <typename T, typename Alloc>
-    struct is_container<std::list<T, Alloc>>{
+    template < typename T, typename std::enable_if<is_tuple<T>::value, int>::type = 0 >
+    auto print_ip( const T& tp ) {
 
-        static const bool value = true;
-    };
-
+        print_tuple_helper( tp, std::make_index_sequence<std::tuple_size<T>::value>() );
+    }
     //------------------------------------------------------
 
     template<typename T>
     void print(const T& t) {
 
-        print_ip<T, std::is_integral<T>::value, is_container<T>::value>::print_pr(t);
 
+       print_ip(t);
     }
 
-} // end of namespace PRNT
+} // end of namespace HW4
