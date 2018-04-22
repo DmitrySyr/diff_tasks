@@ -12,7 +12,6 @@
 
 namespace HW4{
 
-
     //------------------------------------------------------
 
     template <typename T>
@@ -49,10 +48,8 @@ namespace HW4{
     };
     //------------------------------------------------------
 
-    template <  typename T
-              , typename std::enable_if<!( is_container<T>::value || is_tuple<T>::value || std::is_integral<T>::value ), int>::type = 0
-              >
-    auto print_ip(const T& str) {
+    template<typename T>
+    auto print_ip(const std::basic_string<T>& str) {
 
         std::cout << str;
     }
