@@ -35,7 +35,7 @@ int main()
 
         HW4::print(a); std::cout << "\n";
 
-        HW4::print("1212.1212.112"); std::cout << "\n";
+        HW4::print(std::string{"1212.1212.112"}); std::cout << "\n";
 
 
 
