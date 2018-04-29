@@ -25,6 +25,6 @@ deploy:
     github-token: $GH_TOKEN
     keep-history: true
     local-dir: otus_task_5/html
-    on:
-      branch: master
+#    on:
+#      branch: master
   
