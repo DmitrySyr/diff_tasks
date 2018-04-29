@@ -9,14 +9,13 @@ before_script:
   - sudo apt-get update -qq
   - sudo apt-get install graphviz
   - sudo apt-get install doxygen
-  - cd otus_task_4
+  - cd otus_task_5
 script:
   # Install GCC 7 and Boost Test Framework 1.54
   - sudo apt-get install -y -qq g++-7 libboost-test1.54-dev
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 90
   - cmake .
   - cmake --build .
-  - cmake --build . --target test
   - cmake --build . --target package
   - doxygen
 
@@ -25,10 +24,7 @@ deploy:
     skip-cleanup: true
     github-token: $GH_TOKEN
     keep-history: true
-    local-dir: otus_task_4/html
-    on:
-      branch: master
-  - provider: script
-    skip_cleanup: true
-    script:
-    - curl -T print_ip-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -udmitrysyr:$BINTRAY_API_KEY "https://api.bintray.com/content/dmitrysyr/diff_tasks/task_4/$TRAVIS_BUILD_NUMBER/print_ip-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+    local-dir: otus_task_5/html
+#    on:
+#      branch: master
+  
