@@ -1,0 +1,8 @@
+<map id="GUIImpl" name="GUIImpl">
+<area shape="rect" id="node3" href="$classIForm.html" title="IForm" alt="" coords="248,96,303,123"/>
+<area shape="rect" id="node2" href="$classFiguresMenu.html" title="FiguresMenu" alt="" coords="134,187,231,213"/>
+<area shape="rect" id="node4" href="$classMainMenu.html" title="MainMenu" alt="" coords="5,187,87,213"/>
+<area shape="rect" id="node5" href="$classCanvas.html" title="Canvas" alt="" coords="447,187,513,213"/>
+<area shape="rect" id="node7" href="$classMainWindow.html" title="MainWindow" alt="" coords="266,187,363,213"/>
+<area shape="rect" id="node6" href="$classDrawing.html" title="Drawing" alt="" coords="545,96,615,123"/>
+</map>

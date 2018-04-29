@@ -37,7 +37,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -68,8 +67,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li class="current"><a href="globals.html"><span>All</span></a></li>
       <li><a href="globals_func.html"><span>Functions</span></a></li>
-      <li><a href="globals_vars.html"><span>Variables</span></a></li>
-      <li><a href="globals_type.html"><span>Typedefs</span></a></li>
+      <li><a href="globals_enum.html"><span>Enumerations</span></a></li>
+      <li><a href="globals_eval.html"><span>Enumerator</span></a></li>
       <li><a href="globals_defs.html"><span>Macros</span></a></li>
     </ul>
   </div>
@@ -79,7 +78,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -90,20 +89,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="contents">
 <div class="textblock">Here is a list of all file members with links to the files they belong to:</div><ul>
-<li>any
-: <a class="el" href="tests_8cpp.html#a8790c352e0524c72b2c3a430e6b1d258">tests.cpp</a>
+<li>ActiveFigure
+: <a class="el" href="GUIForms_8h.html#a0c18277f4b306deb9e49633fff293a4f">GUIForms.h</a>
 </li>
-<li>BOOST_TEST_DYN_LINK
-: <a class="el" href="tests_8cpp.html#a139f00d2466d591f60b8d6a73c8273f1">tests.cpp</a>
+<li>Circle
+: <a class="el" href="GUIForms_8h.html#a0c18277f4b306deb9e49633fff293a4fa30954d90085f6eaaf5817917fc5fecb3">GUIForms.h</a>
 </li>
-<li>BOOST_TEST_MAIN
-: <a class="el" href="tests_8cpp.html#ab340a5e76af466a5f20ec5500d30a80b">tests.cpp</a>
+<li>FirstClick
+: <a class="el" href="Figures_8h.html#a2ad9d0cf2c86e900843adf5f0450407aa26557fc94b8a51594aaa1d8384b834cb">Figures.h</a>
 </li>
-<li>BOOST_TEST_MODULE
-: <a class="el" href="tests_8cpp.html#a6b2a3852db8bb19ab6909bac01859985">tests.cpp</a>
-</li>
-<li>for_index()
-: <a class="el" href="tests_8cpp.html#ac3e2c1e6e55705c61cb3552b93afae47">tests.cpp</a>
+<li>Line
+: <a class="el" href="GUIForms_8h.html#a0c18277f4b306deb9e49633fff293a4fa4803e6b9e63dabf04de980788d6a13c4">GUIForms.h</a>
 </li>
 <li>main()
 : <a class="el" href="main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main.cpp</a>
@@ -111,8 +107,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>PROJECT_VERSION_PATCH
 : <a class="el" href="version_8h.html#a4a5fc96a4bdd7d68ed99ccce9ca2e77e">version.h</a>
 </li>
-<li>ss
-: <a class="el" href="tests_8cpp.html#a8fc3524f4e679a41dcc8d0f302d637ed">tests.cpp</a>
+<li>Quadrat
+: <a class="el" href="GUIForms_8h.html#a0c18277f4b306deb9e49633fff293a4fada24035c8cbfb572d98fdebb9489f917">GUIForms.h</a>
+</li>
+<li>SecondClick
+: <a class="el" href="Figures_8h.html#a2ad9d0cf2c86e900843adf5f0450407aa7b50f1822431a44af6ae5c0cb29a01fe">Figures.h</a>
+</li>
+<li>Switcher
+: <a class="el" href="Figures_8h.html#a2ad9d0cf2c86e900843adf5f0450407a">Figures.h</a>
+</li>
+<li>Triangle
+: <a class="el" href="GUIForms_8h.html#a0c18277f4b306deb9e49633fff293a4fa5e5500cb2b82eb72d550de644bd1b64b">GUIForms.h</a>
 </li>
 </ul>
 </div><!-- contents -->

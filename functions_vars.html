@@ -37,7 +37,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -62,6 +61,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li class="current"><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -78,7 +78,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Typedefs</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerator</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -89,12 +89,29 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="contents">
 &#160;<ul>
-<li>value
-: <a class="el" href="structHW4_1_1is__container.html#a128f2238abbd900e5895ac8b0c0c13c5">HW4::is_container&lt; T &gt;</a>
-, <a class="el" href="structHW4_1_1is__container_3_01std_1_1list_3_01T_00_01Alloc_01_4_01_4.html#ae0081518a25556496dbd20aada71f2cf">HW4::is_container&lt; std::list&lt; T, Alloc &gt; &gt;</a>
-, <a class="el" href="structHW4_1_1is__container_3_01std_1_1vector_3_01T_00_01Alloc_01_4_01_4.html#a56311a235c22fa345a2a1a78e4616c22">HW4::is_container&lt; std::vector&lt; T, Alloc &gt; &gt;</a>
-, <a class="el" href="structHW4_1_1is__tuple.html#a4a3e715526dc75e36ee4fdae2f3f52be">HW4::is_tuple&lt; T &gt;</a>
-, <a class="el" href="structHW4_1_1is__tuple_3_01std_1_1tuple_3_01Tp_8_8_8_4_01_4.html#ae955c7cb0bc56b4e31b27cb64b8f8bf8">HW4::is_tuple&lt; std::tuple&lt; Tp...&gt; &gt;</a>
+<li>activeFigure
+: <a class="el" href="classFiguresMenu.html#a256cbf64a5d4648bbc203d469923220c">FiguresMenu</a>
+</li>
+<li>canva
+: <a class="el" href="classGUIImpl.html#a4ad6253798e4051258fc9563caafaebd">GUIImpl</a>
+</li>
+<li>drawing
+: <a class="el" href="classCanvas.html#a62a5f05a419aab69e0ae05e53d9e5a0c">Canvas</a>
+</li>
+<li>figuresMenu
+: <a class="el" href="classGUIImpl.html#a6cf2e33b166688e85123f0bb340aadb3">GUIImpl</a>
+</li>
+<li>gui
+: <a class="el" href="classApplication.html#af48b4bc4a7633f28a76346b7b7ba2702">Application</a>
+</li>
+<li>guiImpl
+: <a class="el" href="classIForm.html#a66076b7dc092cb3148ee056e7d148fbb">IForm</a>
+</li>
+<li>mainMenu
+: <a class="el" href="classGUIImpl.html#a2cefdb22abc7ae7be66c963b26da4981">GUIImpl</a>
+</li>
+<li>mainWindow
+: <a class="el" href="classGUIImpl.html#a1d0184a4e1a8d37f37c2e0699ba160aa">GUIImpl</a>
 </li>
 </ul>
 </div><!-- contents -->

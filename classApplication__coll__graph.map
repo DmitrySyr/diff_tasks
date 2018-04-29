@@ -1,0 +1,9 @@
+<map id="Application" name="Application">
+<area shape="rect" id="node2" href="$classGUIImpl.html" title="GUIImpl" alt="" coords="261,5,331,32"/>
+<area shape="rect" id="node4" href="$classIForm.html" title="IForm" alt="" coords="353,96,408,123"/>
+<area shape="rect" id="node3" href="$classFiguresMenu.html" title="FiguresMenu" alt="" coords="239,187,336,213"/>
+<area shape="rect" id="node5" href="$classMainMenu.html" title="MainMenu" alt="" coords="111,187,192,213"/>
+<area shape="rect" id="node6" href="$classCanvas.html" title="Canvas" alt="" coords="552,187,619,213"/>
+<area shape="rect" id="node8" href="$classMainWindow.html" title="MainWindow" alt="" coords="371,187,468,213"/>
+<area shape="rect" id="node7" href="$classDrawing.html" title="Drawing" alt="" coords="650,96,720,123"/>
+</map>

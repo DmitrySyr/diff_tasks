@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cout_5fredirect',['cout_redirect',['../structcout__redirect.html',1,'']]]
+  ['application',['Application',['../classApplication.html',1,'']]]
 ];
