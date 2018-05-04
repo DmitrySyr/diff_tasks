@@ -26,7 +26,7 @@ add_executable(matrix main.cpp )
 
 add_library(matrix_lib Matrix.h)
 
-target_link_libraries(matrix print_lib)
+target_link_libraries(matrix matrix_lib)
 
 add_executable(matrix_test tests.cpp)
 
@@ -44,7 +44,7 @@ target_link_libraries(matrix_test
   matrix_lib
 )
 
-install(TARGETS print RUNTIME DESTINATION bin)
+install(TARGETS matrix RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 
