@@ -84,7 +84,7 @@ BOOST_AUTO_TEST_CASE ( printing_element )
     BOOST_CHECK_EQUAL ( ss.str(), "555" );
     ss.str( std::string() );
 
-    ss << matrix[0.1][0.1][0.1][10];
+    ss << matrix[0][0][0][10];
     BOOST_CHECK_EQUAL ( ss.str(), "888" );
     ss.str( std::string() );
 
@@ -93,9 +93,9 @@ BOOST_AUTO_TEST_CASE ( printing_element )
     BOOST_CHECK_EQUAL ( ss.str(), "-1" );
     ss.str( std::string() );
 
-    matrix[0][0][0][111] = -1;
+    matrix[0][0][0][1] = -5;
     ss << matrix[0][0][0][1];
-    BOOST_CHECK_EQUAL ( ss.str(), "-1" );
+    BOOST_CHECK_EQUAL ( ss.str(), "-5" );
     ss.str( std::string() );
 
 }
@@ -118,6 +118,92 @@ BOOST_AUTO_TEST_CASE ( select_from )
 
         BOOST_CHECK_EQUAL ( ss.str(), "59888" );
     }
+
+}
+BOOST_AUTO_TEST_CASE ( check_TechnicalTask )
+{
+
+    Matrix<int, -1, 2> matrix;
+
+    BOOST_CHECK_EQUAL ( 0, matrix.size() );
+
+    auto value = matrix[3][5];
+
+    BOOST_CHECK_EQUAL ( -1, value );
+
+    matrix[100][100] = 314;
+    BOOST_CHECK ( matrix[100][100] == 314 );
+    BOOST_CHECK ( matrix.size() == 1 );
+
+    for(auto c: matrix)
+    {
+        int x;
+        int y;
+        int v;
+        std::tie(x, y, v) = c;
+        BOOST_CHECK_EQUAL ( 100, x );
+        BOOST_CHECK_EQUAL ( 100, y );
+        BOOST_CHECK_EQUAL ( 314, v );
+    }
+
+}
+
+BOOST_AUTO_TEST_CASE ( check_incorrect_requests )
+{
+
+    Matrix<int, 0, 2> matrix;
+
+    matrix[3][5] = 1;
+    matrix[3][1] = 2;
+    matrix[5][1] = 3;
+
+
+
+    BOOST_CHECK_THROW( int value = matrix[3][5][1], std::exception );
+
+    BOOST_CHECK_THROW( int v = matrix[3], std::exception );
+
+    BOOST_CHECK_THROW( auto v2 = matrix[3][-9], std::exception );
+
+    BOOST_CHECK_THROW( auto v2 = matrix[-3][9], std::exception );
+
+
+}
+
+BOOST_AUTO_TEST_CASE ( check_iterators )
+{
+
+    Matrix<int, 0, 2> matrix;
+
+    matrix[3][5] = 1;
+    matrix[3][1] = 2;
+    matrix[5][1] = 3;
+
+
+    auto iter1 = matrix.begin();
+
+    ++iter1; ++iter1;
+
+    auto iter2 = matrix.begin();
+
+    int x, y, val;
+
+    std::tie( x, y, val ) = *iter1;
+
+    BOOST_CHECK_EQUAL( x, 5 );
+    BOOST_CHECK_EQUAL( y, 1 );
+    BOOST_CHECK_EQUAL( val, 3 );
+
+
+    std::tie( x, y, val ) = *iter2;
+
+    BOOST_CHECK_EQUAL( x, 3 );
+    BOOST_CHECK_EQUAL( y, 1 );
+    BOOST_CHECK_EQUAL( val, 2 );
+
+    ++iter1;
+
+    BOOST_CHECK_EQUAL( true, iter1 == matrix.end() );
 
 }
 
