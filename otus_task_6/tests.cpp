@@ -148,7 +148,6 @@ BOOST_AUTO_TEST_CASE ( check_TechnicalTask )
 
 }
 
-
 BOOST_AUTO_TEST_CASE ( check_incorrect_requests )
 {
 
@@ -160,13 +159,13 @@ BOOST_AUTO_TEST_CASE ( check_incorrect_requests )
 
 
 
-    BOOST_CHECK_THROW( int value = matrix[3][5][1], std::exception );
+    BOOST_CHECK_THROW( int value = matrix[3][5][1], std::length_error );
 
-    BOOST_CHECK_THROW( int v = matrix[3], std::exception );
+    BOOST_CHECK_THROW( int v = matrix[3], std::length_error );
 
-    BOOST_CHECK_THROW( auto v2 = matrix[3][-9], std::exception );
+    BOOST_CHECK_THROW( auto v2 = matrix[3][-9], std::invalid_argument );
 
-    BOOST_CHECK_THROW( auto v2 = matrix[-3][9], std::exception );
+    BOOST_CHECK_THROW( auto v2 = matrix[-3][9], std::invalid_argument );
 
 
 }
