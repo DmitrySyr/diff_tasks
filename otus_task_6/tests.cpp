@@ -148,7 +148,7 @@ BOOST_AUTO_TEST_CASE ( check_TechnicalTask )
 
 }
 
-/*
+
 BOOST_AUTO_TEST_CASE ( check_incorrect_requests )
 {
 
@@ -170,7 +170,7 @@ BOOST_AUTO_TEST_CASE ( check_incorrect_requests )
 
 
 }
-*/
+
 BOOST_AUTO_TEST_CASE ( check_iterators )
 {
 
