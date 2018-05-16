@@ -21,18 +21,21 @@ auto Convert(const std::array<T, N>& a)
 template <typename T, T filler, int N, int ind = N>
 struct Matrix
 {
-    using Index = std::shared_ptr< std::array<int, N> >;
-    using Data  = std::shared_ptr< std::map< std::array<int, N>, T> >;
+    using Index = std::array<int, N>;
+    using CleverIndex = std::shared_ptr< Index >;
+    using Data  = std::shared_ptr< std::map< Index, T> >;
 
     Matrix<T, filler, N, ind>()
-        : data( std::make_shared<std::map< std::array<int, N>, T>>() )
-        , index( std::make_shared<std::array<int, N>>() )
+        : data( std::make_shared<std::map< Index, T>>() )
+        , index( std::make_shared<Index>() )
         {}
 
-    Matrix<T, filler, N, ind>(Data data_, Index index_) : data( data_ ), index( index_ ) {}
+    Matrix<T, filler, N, ind>(Data DataT, CleverIndex IndexT) : data( DataT ), index( IndexT ) {}
 
-    Matrix<T, filler, N, ind-1> operator[]( int i )
+    Matrix<T, filler, N, ind-1> operator[]( int i ) const
     {
+        if( i < 0 ) { throw std::exception(); }
+
         ( *index )[N-ind] = i;
         return Matrix<T, filler, N, ind-1>( data, index );
     }
@@ -48,17 +51,17 @@ struct Matrix
         public:
             const_iterator() = delete;
 
-            const_iterator( typename std::map< std::array<int, N>, T>::const_iterator p ): current_( p ) {}
+            const_iterator( typename std::map< Index, T>::const_iterator p ): CurrentV( p ) {}
 
             auto operator*()
             {
-                return std::tuple_cat( Convert( current_->first ), std::make_tuple( current_->second ) );
+                return std::tuple_cat( Convert( CurrentV->first ), std::make_tuple( CurrentV->second ) );
             }
 
 
             const_iterator& operator++()
             {
-                 ++(this->current_);
+                 ++(this->CurrentV);
                 return *this;
             }
 
@@ -66,40 +69,59 @@ struct Matrix
 
             const_iterator& operator--()
             {
-                 --(this->current_);
+                 --(this->CurrentV);
                 return *this;
             }
 
             const_iterator operator--( int ) = delete;
 
-            bool operator==( const const_iterator& other ) const { return this->current_ == other.current_; }
-            bool operator!=( const const_iterator& other ) const { return this->current_ != other.current_; }
+            bool operator==( const const_iterator& other ) const { return this->CurrentV == other.CurrentV; }
+            bool operator!=( const const_iterator& other ) const { return this->CurrentV != other.CurrentV; }
 
         private:
-            typename std::map< std::array<int, N>, T>::const_iterator current_;
+            typename std::map< Index, T>::const_iterator CurrentV;
 
     };
 
-    const_iterator begin() { return const_iterator( ( *data ).begin() ); }
-    const_iterator end() { return const_iterator( ( *data ).end() ); }
+    const_iterator begin() { return const_iterator( data -> begin() ); }
+    const_iterator end()   { return const_iterator( data -> end() ); }
+
+    auto& operator=(const T& value )
+    {
+        throw std::exception();
+        return *this;
+    }
+
+    operator T() const
+    {
+        throw std::exception();
+    }
 
     Data data;
-    Index index;
+    CleverIndex index;
 };
 
 template <typename T, T filler, int N>
 struct Matrix<T, filler, N, 1>
 {
-    using Index = std::shared_ptr< std::array<int, N> >;
+    using Index = std::array<int, N>;
+    using CleverIndex = std::shared_ptr< Index >;
     using Data  = std::shared_ptr< std::map< std::array<int, N>, T > >;
 
-    Matrix<T, filler, N, 1>( Data data_, Index index_ )
-        : data( data_ )
-        , index( index_ ) {}
+    Matrix<T, filler, N, 1>( Data DataT, CleverIndex IndexT )
+        : data( DataT )
+        , index( IndexT )
+        , index_complete ( false ) {}
 
     auto& operator[]( int i )
     {
+        if( i < 0 ) { throw std::exception(); }
+
+        if( index_complete ) { throw std::exception(); }
+
         ( *index )[N-1] = i;
+        index_complete = true;
+
         return *this;
     }
 
@@ -111,9 +133,9 @@ struct Matrix<T, filler, N, 1>
         }
         else
         {
-            if( ( *data ).find( *index ) != ( *data ).end() )
+            if( data -> find( *index ) != data -> end() )
             {
-                ( *data ).erase( *index );
+                data -> erase( *index );
             }
         }
 
@@ -127,7 +149,9 @@ struct Matrix<T, filler, N, 1>
 
     operator T() const
     {
-        if( ( *data ).find( *index ) != ( *data ).end() )
+        if( !index_complete ) { throw std::exception(); }
+
+        if( data -> find( *index ) != data -> end() )
             {
                 return ( *data )[*index];
             }
@@ -139,7 +163,7 @@ struct Matrix<T, filler, N, 1>
 
     friend std::ostream& operator<<( std::ostream& out, const Matrix<T, filler, N, 1>& matrix)
     {
-        if( ( *matrix.data ).find( *matrix.index ) != ( *matrix.data ).end() )
+        if( ( matrix.data ) -> find( *matrix.index ) != ( matrix.data ) -> end() )
         {
             out << ( *matrix.data )[( *matrix.index )];
         }
@@ -152,5 +176,6 @@ struct Matrix<T, filler, N, 1>
     }
 
     Data data;
-    Index index;
+    CleverIndex index;
+    bool index_complete;
 };
