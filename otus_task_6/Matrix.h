@@ -7,32 +7,26 @@
 #include <array>
 #include <tuple>
 
-template<typename T, size_t... I>
-auto Convert(const T& a, std::index_sequence<I...>)
-{
-    return std::make_tuple(a[I]...);
-}
-template<typename T, size_t N, typename Seq = std::make_index_sequence<N>>
-auto Convert(const std::array<T, N>& a)
-{
-    return Convert(a, Seq{});
-}
+#include "utils.h"
 
 template <typename T, T filler, int N, int ind = N>
 struct Matrix
 {
-    using Index = std::array<int, N>;
+    using Index       = std::array<int, N>;
     using CleverIndex = std::shared_ptr< Index >;
-    using Data  = std::shared_ptr< std::map< Index, T> >;
+
+    using tupleHelper = typename tuple_n<N>::type;
+    using Data        = std::map< Index, decltype( std::tuple_cat( std::declval<tupleHelper>(), std::declval<std::tuple<T>>() ) ) >;
+    using cleverData  = std::shared_ptr< Data >;
 
     Matrix<T, filler, N, ind>()
-        : data( std::make_shared<std::map< Index, T>>() )
+        : data( std::make_shared< Data >() )
         , index( std::make_shared<Index>() )
         {}
 
-    Matrix<T, filler, N, ind>(Data DataT, CleverIndex IndexT) : data( DataT ), index( IndexT ) {}
+    Matrix<T, filler, N, ind>( cleverData DataT, CleverIndex IndexT ) : data( DataT ), index( IndexT ) {}
 
-    Matrix<T, filler, N, ind-1> operator[]( int i ) const
+    Matrix<T, filler, N, ind-1> operator[]( int i )
     {
         if( i < 0 ) { throw std::exception(); }
 
@@ -42,49 +36,13 @@ struct Matrix
 
     size_t size() const
     {
-        return ( *data ).size();
+        return data -> size();
     }
 
 
-    class const_iterator
-    {
-        public:
-            const_iterator() = delete;
 
-            const_iterator( typename std::map< Index, T>::const_iterator p ): CurrentV( p ) {}
-
-            auto operator*()
-            {
-                return std::tuple_cat( Convert( CurrentV->first ), std::make_tuple( CurrentV->second ) );
-            }
-
-
-            const_iterator& operator++()
-            {
-                 ++(this->CurrentV);
-                return *this;
-            }
-
-            const_iterator operator++( int ) = delete;
-
-            const_iterator& operator--()
-            {
-                 --(this->CurrentV);
-                return *this;
-            }
-
-            const_iterator operator--( int ) = delete;
-
-            bool operator==( const const_iterator& other ) const { return this->CurrentV == other.CurrentV; }
-            bool operator!=( const const_iterator& other ) const { return this->CurrentV != other.CurrentV; }
-
-        private:
-            typename std::map< Index, T>::const_iterator CurrentV;
-
-    };
-
-    const_iterator begin() { return const_iterator( data -> begin() ); }
-    const_iterator end()   { return const_iterator( data -> end() ); }
+    iterator<T, N> begin() { return iterator<T, N>( data -> begin() ); }
+    iterator<T, N> end()   { return iterator<T, N>( data -> end() ); }
 
     auto& operator=(const T& value )
     {
@@ -97,18 +55,21 @@ struct Matrix
         throw std::exception();
     }
 
-    Data data;
+    cleverData data;
     CleverIndex index;
 };
 
 template <typename T, T filler, int N>
 struct Matrix<T, filler, N, 1>
 {
-    using Index = std::array<int, N>;
+    using Index       = std::array<int, N>;
     using CleverIndex = std::shared_ptr< Index >;
-    using Data  = std::shared_ptr< std::map< std::array<int, N>, T > >;
 
-    Matrix<T, filler, N, 1>( Data DataT, CleverIndex IndexT )
+    using tupleHelper = typename tuple_n<N>::type;
+    using Data        = std::map< Index, decltype( std::tuple_cat( std::declval<tupleHelper>(), std::declval<std::tuple<T>>() ) ) >;
+    using cleverData  = std::shared_ptr< Data >;
+
+    Matrix<T, filler, N, 1>( cleverData DataT, CleverIndex IndexT )
         : data( DataT )
         , index( IndexT )
         , index_complete ( false ) {}
@@ -125,11 +86,23 @@ struct Matrix<T, filler, N, 1>
         return *this;
     }
 
+    const auto& operator[]( int i ) const
+    {
+        if( i < 0 ) { throw std::exception(); }
+
+        if( index_complete ) { throw std::exception(); }
+
+        ( *index )[N-1] = i;
+        index_complete = true;
+
+        return static_cast<const Matrix<T, filler, N, 1>&>( *this );
+    }
+
     auto& operator=(const T& value )
     {
         if( value != filler )
         {
-            ( *data )[*index] = value;
+            ( *data )[*index] = std::tuple_cat( Convert( *index ), std::make_tuple( value ) );
         }
         else
         {
@@ -144,7 +117,7 @@ struct Matrix<T, filler, N, 1>
 
     bool operator==(const T& value ) const
     {
-        return ( *data )[*index] == value;
+        return std::get<N>( ( *data )[*index] ) == value;
     }
 
     operator T() const
@@ -153,7 +126,7 @@ struct Matrix<T, filler, N, 1>
 
         if( data -> find( *index ) != data -> end() )
             {
-                return ( *data )[*index];
+                return std::get<N>( ( *data )[*index] );
             }
         else
             {
@@ -165,7 +138,7 @@ struct Matrix<T, filler, N, 1>
     {
         if( ( matrix.data ) -> find( *matrix.index ) != ( matrix.data ) -> end() )
         {
-            out << ( *matrix.data )[( *matrix.index )];
+            out << std::get<N>( ( *matrix.data )[( *matrix.index )] );
         }
         else
         {
@@ -175,7 +148,7 @@ struct Matrix<T, filler, N, 1>
         return out;
     }
 
-    Data data;
+    cleverData data;
     CleverIndex index;
     bool index_complete;
 };

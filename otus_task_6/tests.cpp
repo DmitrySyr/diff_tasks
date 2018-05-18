@@ -11,6 +11,20 @@
 
 BOOST_AUTO_TEST_SUITE ( matrix_tests )
 
+// structure for enabling changing streambuf
+  struct cout_redirect {
+    cout_redirect( std::streambuf * new_buffer )
+        : old( std::cout.rdbuf( new_buffer ) )
+    { }
+
+    ~cout_redirect( ) {
+        std::cout.rdbuf( old );
+    }
+
+  private:
+    std::streambuf * old;
+  };
+
 BOOST_AUTO_TEST_CASE ( check_empty )
 {
     Matrix<int, 0, 3> matrix;
@@ -79,23 +93,40 @@ BOOST_AUTO_TEST_CASE ( printing_element )
     matrix[0][0][0][1] = 555;
     matrix[0][0][0][10] = 888;
 
+    {
+        cout_redirect guard( ss.rdbuf() );
+        std::cout << matrix[0][0][0][1];
+    }
 
-    ss << matrix[0][0][0][1];
-    BOOST_CHECK_EQUAL ( ss.str(), "555" );
+
+    BOOST_CHECK_EQUAL ( ss.str(), "0001555" );
     ss.str( std::string() );
 
-    ss << matrix[0][0][0][10];
-    BOOST_CHECK_EQUAL ( ss.str(), "888" );
+    {
+        cout_redirect guard( ss.rdbuf() );
+        std::cout << matrix[0][0][0][10];
+    }
+
+    BOOST_CHECK_EQUAL ( ss.str(), "00010888" );
     ss.str( std::string() );
 
     matrix[0][0][0][1] = -1;
-    ss << matrix[0][0][0][1];
-    BOOST_CHECK_EQUAL ( ss.str(), "-1" );
+    {
+        cout_redirect guard( ss.rdbuf() );
+        std::cout << matrix[0][0][0][1];
+    }
+
+    BOOST_CHECK_EQUAL ( ss.str(), "0001-1" );
     ss.str( std::string() );
 
     matrix[0][0][0][1] = -5;
-    ss << matrix[0][0][0][1];
-    BOOST_CHECK_EQUAL ( ss.str(), "-5" );
+
+    {
+        cout_redirect guard( ss.rdbuf() );
+        std::cout << matrix[0][0][0][1];
+    }
+
+    BOOST_CHECK_EQUAL ( ss.str(), "0001-5" );
     ss.str( std::string() );
 
 }
