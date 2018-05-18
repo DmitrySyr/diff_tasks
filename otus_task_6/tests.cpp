@@ -99,7 +99,7 @@ BOOST_AUTO_TEST_CASE ( printing_element )
     }
 
 
-    BOOST_CHECK_EQUAL ( ss.str(), "0001555" );
+    BOOST_CHECK_EQUAL ( ss.str(), "555" );
     ss.str( std::string() );
 
     {
@@ -107,7 +107,7 @@ BOOST_AUTO_TEST_CASE ( printing_element )
         std::cout << matrix[0][0][0][10];
     }
 
-    BOOST_CHECK_EQUAL ( ss.str(), "00010888" );
+    BOOST_CHECK_EQUAL ( ss.str(), "888" );
     ss.str( std::string() );
 
     matrix[0][0][0][1] = -1;
@@ -116,7 +116,7 @@ BOOST_AUTO_TEST_CASE ( printing_element )
         std::cout << matrix[0][0][0][1];
     }
 
-    BOOST_CHECK_EQUAL ( ss.str(), "0001-1" );
+    BOOST_CHECK_EQUAL ( ss.str(), "-1" );
     ss.str( std::string() );
 
     matrix[0][0][0][1] = -5;
@@ -126,7 +126,7 @@ BOOST_AUTO_TEST_CASE ( printing_element )
         std::cout << matrix[0][0][0][1];
     }
 
-    BOOST_CHECK_EQUAL ( ss.str(), "0001-5" );
+    BOOST_CHECK_EQUAL ( ss.str(), "-5" );
     ss.str( std::string() );
 
 }
