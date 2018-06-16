@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quit',['Quit',['../classMainMenu.html#a2dadfbbe0e53162e4ddf922896274e2d',1,'MainMenu']]]
+  ['processaction',['ProcessAction',['../classDocument.html#ac4c1e49bdd5187c2dc285ee23e9e4449',1,'Document']]]
 ];

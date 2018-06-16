@@ -1,0 +1,12 @@
+<map id="GUI.h" name="GUI.h">
+<area shape="rect" id="node2" href="$Application_8h.html" title="Application.h" alt="" coords="5,229,101,256"/>
+<area shape="rect" id="node5" href="$Document_8h.html" title="Document.h" alt="" coords="157,80,251,107"/>
+<area shape="rect" id="node11" href="$GUI_8cpp.html" title="GUI.cpp" alt="" coords="275,80,345,107"/>
+<area shape="rect" id="node3" href="$main_8cpp.html" title="main.cpp" alt="" coords="57,304,131,331"/>
+<area shape="rect" id="node4" href="$tests_8cpp.html" title="tests.cpp" alt="" coords="157,304,232,331"/>
+<area shape="rect" id="node6" href="$Objects_8h.html" title="Objects.h" alt="" coords="242,155,320,181"/>
+<area shape="rect" id="node7" href="$Figures_8h.html" title="Figures.h" alt="" coords="157,229,232,256"/>
+<area shape="rect" id="node8" href="$Menu_8h.html" title="Menu.h" alt="" coords="257,229,321,256"/>
+<area shape="rect" id="node10" href="$Document_8cpp.html" title="Document.cpp" alt="" coords="60,155,167,181"/>
+<area shape="rect" id="node9" href="$Menu_8cpp.html" title="Menu.cpp" alt="" coords="257,304,335,331"/>
+</map>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['_7eifigure',['~IFigure',['../classIFigure.html#ada317a161e64a2755562a430260c2b8e',1,'IFigure']]],
-  ['_7eiform',['~IForm',['../classIForm.html#aeae94813dd39b96fc054eb241b51b916',1,'IForm']]]
+  ['savedocument',['SaveDocument',['../classDocument.html#a4b5d3408291655e8038a961cc0504456',1,'Document']]],
+  ['shutdown',['ShutDown',['../classApplication.html#ab64b70bb88997428bb5b49eaa013228f',1,'Application']]]
 ];

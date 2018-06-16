@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['figuresmenu',['figuresMenu',['../classGUIImpl.html#a6cf2e33b166688e85123f0bb340aadb3',1,'GUIImpl']]]
+  ['gui',['gui',['../classApplication.html#a4ee225b14524d3e7786941af2cb41f1d',1,'Application']]]
 ];

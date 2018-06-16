@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['gui',['gui',['../classApplication.html#af48b4bc4a7633f28a76346b7b7ba2702',1,'Application']]],
-  ['guiimpl',['guiImpl',['../classIForm.html#a66076b7dc092cb3148ee056e7d148fbb',1,'IForm']]]
+  ['processor',['Processor',['../classCanvas.html#af1f8d34831dccb539c849c0adf0240f0',1,'Canvas::Processor()'],['../classIObject.html#a8a435b97e05143367878302d460236b2',1,'IObject::Processor()']]]
 ];

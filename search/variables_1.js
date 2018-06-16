@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['canva',['canva',['../classGUIImpl.html#a4ad6253798e4051258fc9563caafaebd',1,'GUIImpl']]]
+  ['currentprocessor',['CurrentProcessor',['../structDocument_1_1ObjectsAreas.html#afbde535d5844a455bb7d172f340f22ed',1,'Document::ObjectsAreas']]]
 ];

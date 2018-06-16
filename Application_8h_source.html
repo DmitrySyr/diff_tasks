@@ -85,63 +85,76 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <a href="Application_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="GUIImpl_8h.html">GUIImpl.h</a>&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Figures_8h.html">Figures.h</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="GUIForms_8h.html">GUIForms.h</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Drawing_8h.html">Drawing.h</a>&quot;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classApplication.html">    8</a></span>&#160;<span class="keyword">class </span><a class="code" href="classApplication.html">Application</a>{</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classApplication.html#a33024991540d2441cb6aca59cde0643b">   12</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classApplication.html">Application</a>&amp; <a class="code" href="classApplication.html#a33024991540d2441cb6aca59cde0643b">Instance</a>()</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    {</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;        <span class="keyword">static</span> <a class="code" href="classApplication.html">Application</a> instance;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keywordflow">return</span> instance;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    }</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classApplication.html#a4e6f530e7e9ee36a14c79efb8dcce25a">   18</a></span>&#160;    <a class="code" href="classApplication.html">Application</a>* <a class="code" href="classApplication.html#a4e6f530e7e9ee36a14c79efb8dcce25a">GetParent</a>() {</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">this</span>;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    }</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="classApplication.html#a276388f7090c0a2b1c8b16cf033b969d">   23</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classApplication.html#a276388f7090c0a2b1c8b16cf033b969d">Init</a>() {</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordflow">if</span>( !<a class="code" href="classApplication.html#af48b4bc4a7633f28a76346b7b7ba2702">gui</a> ) {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <a class="code" href="classApplication.html#af48b4bc4a7633f28a76346b7b7ba2702">gui</a> = <span class="keyword">new</span> <a class="code" href="classGUIImpl.html">GUIImpl</a>();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            <a class="code" href="classApplication.html#af48b4bc4a7633f28a76346b7b7ba2702">gui</a> -&gt; Show();</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        }</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    }</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classApplication.html#ab64b70bb88997428bb5b49eaa013228f">   31</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classApplication.html#ab64b70bb88997428bb5b49eaa013228f">ShutDown</a>() {}</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classApplication.html#aa2fb4766fcbc345920bbf26cdc5df15b">   33</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classApplication.html#aa2fb4766fcbc345920bbf26cdc5df15b">MainLoop</a>() {}</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="GUI_8h.html">GUI.h</a>&quot;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Document_8h.html">Document.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">//#include &quot;Objects.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//#include &quot;Figures.h&quot;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">//#include &quot;Menu.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="classApplication.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="classApplication.html">Application</a>{</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="classApplication.html">Application</a>(){}</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordtype">size_t</span> CurrentDocument;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classApplication.html#a33024991540d2441cb6aca59cde0643b">   16</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classApplication.html">Application</a>&amp; <a class="code" href="classApplication.html#a33024991540d2441cb6aca59cde0643b">Instance</a>()</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keyword">static</span> <a class="code" href="classApplication.html">Application</a> instance;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordflow">return</span> instance;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    }</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="classApplication.html#a276388f7090c0a2b1c8b16cf033b969d">   22</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classApplication.html#a276388f7090c0a2b1c8b16cf033b969d">Init</a>() {</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordflow">if</span>( !<a class="code" href="classApplication.html#a4ee225b14524d3e7786941af2cb41f1d">gui</a> )</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        {</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            <a class="code" href="classApplication.html#a4ee225b14524d3e7786941af2cb41f1d">gui</a> = std::make_shared&lt;GUI&gt;( );</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        }</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">if</span>( <a class="code" href="classApplication.html#a6d3c04680d0cdf4a19f7b3ea955b1442">documents</a>.empty() )</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        {</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <a class="code" href="classApplication.html#a6d3c04680d0cdf4a19f7b3ea955b1442">documents</a>.push_back( std::make_shared&lt;Document&gt;( <a class="code" href="classApplication.html#a4ee225b14524d3e7786941af2cb41f1d">gui</a>.get() ) );</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            CurrentDocument = <a class="code" href="classApplication.html#a6d3c04680d0cdf4a19f7b3ea955b1442">documents</a>.size() - 1;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        }</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classApplication.html#ab64b70bb88997428bb5b49eaa013228f">   36</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classApplication.html#ab64b70bb88997428bb5b49eaa013228f">ShutDown</a>() {}</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classApplication.html#a03eb21681fbd7473ff2eb2c6009afa8e">Application</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="classApplication.html#a03eb21681fbd7473ff2eb2c6009afa8e">Application</a>(<span class="keyword">const</span> <a class="code" href="classApplication.html">Application</a>&amp; root) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="classApplication.html">Application</a>&amp; <a class="code" href="classApplication.html#ae0294a5e63103980f4f57c7b104f5f6a">operator=</a>(<span class="keyword">const</span> <a class="code" href="classApplication.html">Application</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classApplication.html#aa2fb4766fcbc345920bbf26cdc5df15b">   38</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classApplication.html#aa2fb4766fcbc345920bbf26cdc5df15b">MainLoop</a>()</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    {</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="comment">// receiving user reaction</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="classApplication.html#af48b4bc4a7633f28a76346b7b7ba2702">   44</a></span>&#160;    <a class="code" href="classGUIImpl.html">GUIImpl</a>* <a class="code" href="classApplication.html#af48b4bc4a7633f28a76346b7b7ba2702">gui</a> = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;};</div>
-<div class="ttc" id="Figures_8h_html"><div class="ttname"><a href="Figures_8h.html">Figures.h</a></div></div>
-<div class="ttc" id="Drawing_8h_html"><div class="ttname"><a href="Drawing_8h.html">Drawing.h</a></div></div>
-<div class="ttc" id="classApplication_html_af48b4bc4a7633f28a76346b7b7ba2702"><div class="ttname"><a href="classApplication.html#af48b4bc4a7633f28a76346b7b7ba2702">Application::gui</a></div><div class="ttdeci">GUIImpl * gui</div><div class="ttdef"><b>Definition:</b> Application.h:44</div></div>
-<div class="ttc" id="classApplication_html_ab64b70bb88997428bb5b49eaa013228f"><div class="ttname"><a href="classApplication.html#ab64b70bb88997428bb5b49eaa013228f">Application::ShutDown</a></div><div class="ttdeci">void ShutDown()</div><div class="ttdef"><b>Definition:</b> Application.h:31</div></div>
-<div class="ttc" id="classApplication_html_a03eb21681fbd7473ff2eb2c6009afa8e"><div class="ttname"><a href="classApplication.html#a03eb21681fbd7473ff2eb2c6009afa8e">Application::Application</a></div><div class="ttdeci">Application()=default</div></div>
-<div class="ttc" id="GUIForms_8h_html"><div class="ttname"><a href="GUIForms_8h.html">GUIForms.h</a></div></div>
-<div class="ttc" id="classApplication_html_a4e6f530e7e9ee36a14c79efb8dcce25a"><div class="ttname"><a href="classApplication.html#a4e6f530e7e9ee36a14c79efb8dcce25a">Application::GetParent</a></div><div class="ttdeci">Application * GetParent()</div><div class="ttdef"><b>Definition:</b> Application.h:18</div></div>
-<div class="ttc" id="GUIImpl_8h_html"><div class="ttname"><a href="GUIImpl_8h.html">GUIImpl.h</a></div></div>
-<div class="ttc" id="classApplication_html"><div class="ttname"><a href="classApplication.html">Application</a></div><div class="ttdef"><b>Definition:</b> Application.h:8</div></div>
-<div class="ttc" id="classApplication_html_a276388f7090c0a2b1c8b16cf033b969d"><div class="ttname"><a href="classApplication.html#a276388f7090c0a2b1c8b16cf033b969d">Application::Init</a></div><div class="ttdeci">void Init()</div><div class="ttdef"><b>Definition:</b> Application.h:23</div></div>
-<div class="ttc" id="classApplication_html_aa2fb4766fcbc345920bbf26cdc5df15b"><div class="ttname"><a href="classApplication.html#aa2fb4766fcbc345920bbf26cdc5df15b">Application::MainLoop</a></div><div class="ttdeci">void MainLoop()</div><div class="ttdef"><b>Definition:</b> Application.h:33</div></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="classApplication.html">Application</a>(<span class="keyword">const</span> <a class="code" href="classApplication.html">Application</a>&amp; root)       = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classApplication.html">Application</a>&amp; <a class="code" href="classApplication.html#ae0294a5e63103980f4f57c7b104f5f6a">operator=</a>(<span class="keyword">const</span> <a class="code" href="classApplication.html">Application</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classApplication.html#a482651f88da184fb098db12e8492e45d">ChangeDocument</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classApplication.html#a22b4f2b9f6c151e4b6de54ccae1036f2">DeleteDocument</a>();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classApplication.html#a197c3b564a6b3e448c290a432ad61bad">AddDocument</a>();</div>
+<div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="classApplication.html#ac1e1896b5470b0249868d74e8fcd972a">   50</a></span>&#160;    <a class="code" href="classDocument.html">Document</a>* <a class="code" href="classApplication.html#ac1e1896b5470b0249868d74e8fcd972a">GetCurrentDocument</a>()</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    {</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classApplication.html#a6d3c04680d0cdf4a19f7b3ea955b1442">documents</a>[CurrentDocument].get();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classApplication.html#a4ee225b14524d3e7786941af2cb41f1d">   55</a></span>&#160;    std::shared_ptr&lt;GUI&gt; <a class="code" href="classApplication.html#a4ee225b14524d3e7786941af2cb41f1d">gui</a>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="classApplication.html#a6d3c04680d0cdf4a19f7b3ea955b1442">   56</a></span>&#160;    std::vector&lt;std::shared_ptr&lt;Document&gt;&gt; <a class="code" href="classApplication.html#a6d3c04680d0cdf4a19f7b3ea955b1442">documents</a>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
+<div class="ttc" id="GUI_8h_html"><div class="ttname"><a href="GUI_8h.html">GUI.h</a></div></div>
+<div class="ttc" id="classApplication_html_a197c3b564a6b3e448c290a432ad61bad"><div class="ttname"><a href="classApplication.html#a197c3b564a6b3e448c290a432ad61bad">Application::AddDocument</a></div><div class="ttdeci">void AddDocument()</div></div>
+<div class="ttc" id="classApplication_html_a6d3c04680d0cdf4a19f7b3ea955b1442"><div class="ttname"><a href="classApplication.html#a6d3c04680d0cdf4a19f7b3ea955b1442">Application::documents</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; Document &gt; &gt; documents</div><div class="ttdef"><b>Definition:</b> Application.h:56</div></div>
+<div class="ttc" id="Document_8h_html"><div class="ttname"><a href="Document_8h.html">Document.h</a></div></div>
+<div class="ttc" id="classApplication_html_ac1e1896b5470b0249868d74e8fcd972a"><div class="ttname"><a href="classApplication.html#ac1e1896b5470b0249868d74e8fcd972a">Application::GetCurrentDocument</a></div><div class="ttdeci">Document * GetCurrentDocument()</div><div class="ttdef"><b>Definition:</b> Application.h:50</div></div>
+<div class="ttc" id="classApplication_html_a482651f88da184fb098db12e8492e45d"><div class="ttname"><a href="classApplication.html#a482651f88da184fb098db12e8492e45d">Application::ChangeDocument</a></div><div class="ttdeci">void ChangeDocument()</div></div>
+<div class="ttc" id="classApplication_html_a22b4f2b9f6c151e4b6de54ccae1036f2"><div class="ttname"><a href="classApplication.html#a22b4f2b9f6c151e4b6de54ccae1036f2">Application::DeleteDocument</a></div><div class="ttdeci">void DeleteDocument()</div></div>
+<div class="ttc" id="classApplication_html_ab64b70bb88997428bb5b49eaa013228f"><div class="ttname"><a href="classApplication.html#ab64b70bb88997428bb5b49eaa013228f">Application::ShutDown</a></div><div class="ttdeci">void ShutDown()</div><div class="ttdef"><b>Definition:</b> Application.h:36</div></div>
+<div class="ttc" id="classApplication_html"><div class="ttname"><a href="classApplication.html">Application</a></div><div class="ttdef"><b>Definition:</b> Application.h:9</div></div>
+<div class="ttc" id="classDocument_html"><div class="ttname"><a href="classDocument.html">Document</a></div><div class="ttdef"><b>Definition:</b> Document.h:19</div></div>
+<div class="ttc" id="classApplication_html_a4ee225b14524d3e7786941af2cb41f1d"><div class="ttname"><a href="classApplication.html#a4ee225b14524d3e7786941af2cb41f1d">Application::gui</a></div><div class="ttdeci">std::shared_ptr&lt; GUI &gt; gui</div><div class="ttdef"><b>Definition:</b> Application.h:55</div></div>
+<div class="ttc" id="classApplication_html_a276388f7090c0a2b1c8b16cf033b969d"><div class="ttname"><a href="classApplication.html#a276388f7090c0a2b1c8b16cf033b969d">Application::Init</a></div><div class="ttdeci">void Init()</div><div class="ttdef"><b>Definition:</b> Application.h:22</div></div>
+<div class="ttc" id="classApplication_html_aa2fb4766fcbc345920bbf26cdc5df15b"><div class="ttname"><a href="classApplication.html#aa2fb4766fcbc345920bbf26cdc5df15b">Application::MainLoop</a></div><div class="ttdeci">void MainLoop()</div><div class="ttdef"><b>Definition:</b> Application.h:38</div></div>
 <div class="ttc" id="classApplication_html_ae0294a5e63103980f4f57c7b104f5f6a"><div class="ttname"><a href="classApplication.html#ae0294a5e63103980f4f57c7b104f5f6a">Application::operator=</a></div><div class="ttdeci">Application &amp; operator=(const Application &amp;)=delete</div></div>
-<div class="ttc" id="classApplication_html_a33024991540d2441cb6aca59cde0643b"><div class="ttname"><a href="classApplication.html#a33024991540d2441cb6aca59cde0643b">Application::Instance</a></div><div class="ttdeci">static Application &amp; Instance()</div><div class="ttdef"><b>Definition:</b> Application.h:12</div></div>
-<div class="ttc" id="classGUIImpl_html"><div class="ttname"><a href="classGUIImpl.html">GUIImpl</a></div><div class="ttdef"><b>Definition:</b> GUIImpl.h:12</div></div>
+<div class="ttc" id="classApplication_html_a33024991540d2441cb6aca59cde0643b"><div class="ttname"><a href="classApplication.html#a33024991540d2441cb6aca59cde0643b">Application::Instance</a></div><div class="ttdeci">static Application &amp; Instance()</div><div class="ttdef"><b>Definition:</b> Application.h:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -1,8 +1,0 @@
-<map id="FiguresMenu" name="FiguresMenu">
-<area shape="rect" id="node3" href="$classGUIImpl.html" title="GUIImpl" alt="" coords="215,96,285,123"/>
-<area shape="rect" id="node2" href="$classIForm.html" title="IForm" alt="" coords="223,187,277,213"/>
-<area shape="rect" id="node4" href="$classMainMenu.html" title="MainMenu" alt="" coords="5,277,87,304"/>
-<area shape="rect" id="node5" href="$classCanvas.html" title="Canvas" alt="" coords="305,277,372,304"/>
-<area shape="rect" id="node7" href="$classMainWindow.html" title="MainWindow" alt="" coords="169,277,265,304"/>
-<area shape="rect" id="node6" href="$classDrawing.html" title="Drawing" alt="" coords="303,187,373,213"/>
-</map>

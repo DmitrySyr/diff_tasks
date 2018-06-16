@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['guiimpl',['GUIImpl',['../classGUIImpl.html',1,'']]]
+  ['gui',['GUI',['../classGUI.html',1,'']]]
 ];

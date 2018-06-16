@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['activefigure',['activeFigure',['../classFiguresMenu.html#a256cbf64a5d4648bbc203d469923220c',1,'FiguresMenu']]]
+  ['area',['area',['../classDocument.html#a7fe8102ab4b20da5748eb8ecd34169a2',1,'Document']]],
+  ['areas',['areas',['../structDocument_1_1ObjectsAreas.html#acd0d8c5784c664ff0353330f98e2cadd',1,'Document::ObjectsAreas']]]
 ];

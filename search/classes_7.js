@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['mainmenu',['MainMenu',['../classMainMenu.html',1,'']]],
-  ['mainwindow',['MainWindow',['../classMainWindow.html',1,'']]]
+  ['objectsareas',['ObjectsAreas',['../structDocument_1_1ObjectsAreas.html',1,'Document']]]
 ];

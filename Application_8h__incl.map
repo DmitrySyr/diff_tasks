@@ -1,6 +1,5 @@
 <map id="Application.h" name="Application.h">
-<area shape="rect" id="node2" href="$GUIImpl_8h.html" title="GUIImpl.h" alt="" coords="5,80,87,107"/>
-<area shape="rect" id="node3" href="$GUIForms_8h.html" title="GUIForms.h" alt="" coords="43,155,137,181"/>
-<area shape="rect" id="node4" href="$Drawing_8h.html" title="Drawing.h" alt="" coords="63,229,144,256"/>
-<area shape="rect" id="node6" href="$Figures_8h.html" title="Figures.h" alt="" coords="163,304,239,331"/>
+<area shape="rect" id="node2" href="$GUI_8h.html" title="GUI.h" alt="" coords="102,80,159,107"/>
+<area shape="rect" id="node4" href="$Document_8h.html" title="Document.h" alt="" coords="117,155,211,181"/>
+<area shape="rect" id="node7" href="$Objects_8h.html" title="Objects.h" alt="" coords="253,229,331,256"/>
 </map>

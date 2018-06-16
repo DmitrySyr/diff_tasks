@@ -1,6 +1,0 @@
-<map id="IForm" name="IForm">
-<area shape="rect" id="node2" href="$classCanvas.html" title="Canvas" alt="" coords="5,80,72,107"/>
-<area shape="rect" id="node3" href="$classFiguresMenu.html" title="FiguresMenu" alt="" coords="97,80,193,107"/>
-<area shape="rect" id="node4" href="$classMainMenu.html" title="MainMenu" alt="" coords="219,80,300,107"/>
-<area shape="rect" id="node5" href="$classMainWindow.html" title="MainWindow" alt="" coords="326,80,423,107"/>
-</map>

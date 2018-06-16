@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['newdrawing',['NewDrawing',['../classMainMenu.html#aad9b096758dfc134719296fe7354dc48',1,'MainMenu']]]
+  ['newdocument',['NewDocument',['../classDocument.html#accf2612b3f0ba3ab600a9054bddb078e',1,'Document']]]
 ];
