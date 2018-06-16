@@ -1,54 +1,126 @@
-/*
+#ifndef FIGURES_H_INCLUDED
+#define FIGURES_H_INCLUDED
 
-File contains classes for graphical primitives.
-
-*/
-
-#pragma once
-
-#include <vector>
-#include <utility>
-
-enum class Switcher{
-    FirstClick, SecondClick
-};
+#include "Document.h"
+#include "Objects.h"
 
 
-class IFigure{
+
+class Canvas final : public IObject {
+    Document* doc = nullptr;
+    size_t ObjectID;
 
 public:
-    IFigure() {}
-    virtual ~IFigure(){}
+    // обработчик, если действие пришлось на объект Canvas
+    IObject* Processor = nullptr;
 
-    void HandClick( int x, int y );
+    Canvas( Document* document, int PositionX, int PositionY, int Height, int Width )
+    {
+        doc = document;
+        document->AddNewObject( );
+        ObjectID = document->GetObjectID();
+    }
 
-    virtual std::vector< std::pair<int, int> > GetAllPoints() = 0;
+    void GetDataForDrawing() const override {}
+    void ReactOnClick( size_t x, size_t y ) override
+    {
+        RealReactionOnClick( x, y );
+    }
 
+    void virtual ReactOnDragAndDrop() override
+    {
+        RealReactionOnDragAndDrop();
+    }
 
 private:
+    void RealReactionOnClick( size_t x, size_t y )
+    {
+        if( Processor )
+        {
+            Processor->ReactOnClick( x, y );
+        }
+    }
 
-    Switcher switcher = Switcher::FirstClick;
+    void RealReactionOnDragAndDrop()
+    {
+        if( Processor )
+        {
+            Processor->ReactOnDragAndDrop();
+        }
 
-    void SetCenter( int x, int y ) {}
-    void SetTarget( int x, int y ) {}
-
-    int CenterX, CenterY, TargetX, TargetY;
-
-
+    }
 };
 
-class Line final : public IFigure {
+class FiguresMenu_Circle final : public IObject {
+    Document* doc = nullptr;
+    size_t ObjectID;
 
 public:
+    FiguresMenu_Circle( Document* document, int PositionX, int PositionY, int Height, int Width )
+    {
+        doc = document;
+        document->AddNewObject( );
+        ObjectID = document->GetObjectID();
+    }
 
-    std::vector< std::pair<int, int> > GetAllPoints() override {}
+    void GetDataForDrawing() const override {}
+    void ReactOnClick( size_t x, size_t y ) override
+    {
+        RealReactionOnClick( x, y );
+    }
 
+    void virtual ReactOnDragAndDrop() override
+    {
+        RealReactionOnDragAndDrop();
+    }
+
+private:
+    void RealReactionOnClick( size_t x , size_t y )
+    {
+        if( Processor != this )
+        {
+            doc->GetCanvas()->Processor = this;
+        }
+    }
+
+    void RealReactionOnDragAndDrop()
+    {
+        doc->AddNewObject();
+    }
 };
 
-class Circle final : public IFigure {
+class FiguresMenu_DeleteFigure final : public IObject {
+    Document* doc = nullptr;
+    size_t ObjectID;
 
 public:
+    FiguresMenu_DeleteFigure( Document* document, int PositionX, int PositionY, int Height, int Width )
+    {
+        doc = document;
+        document->AddNewObject( );
+        ObjectID = document->GetObjectID();
+    }
 
-    std::vector< std::pair<int, int> > GetAllPoints() override {}
+    void GetDataForDrawing() const override {}
+    void ReactOnClick( size_t x, size_t y ) override
+    {
+        RealReactionOnClick( x, y );
+    }
 
+private:
+    void RealReactionOnClick( size_t x, size_t y )
+    {
+        if( Processor != this )
+        {
+            doc->GetCanvas()->Processor = this;
+        }
+        else
+        {
+            auto n = doc->FindObject( x, y );
+            doc->DeleteObject( n );
+            doc->AskGUI_Redraw();
+        }
+    }
 };
+
+#endif // FIGURES_H_INCLUDED

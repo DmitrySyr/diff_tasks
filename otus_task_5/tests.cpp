@@ -3,10 +3,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "GUIForms.h"
-#include "Drawing.h"
+#include "Application.h"
+#include "Menu.h"
 #include "Figures.h"
-#include "GUIImpl.h"
 
 #define BOOST_TEST_MAIN
 #define BOOST_TEST_DYN_LINK
@@ -17,61 +16,133 @@
 #include <boost/test/output_test_stream.hpp>
 
 
-BOOST_AUTO_TEST_SUITE(test_graph)
+BOOST_AUTO_TEST_SUITE( test_graph )
 
-BOOST_AUTO_TEST_CASE(test_new) {
+BOOST_AUTO_TEST_CASE( test_create ) {
 
-	Application::Instance().Init();
+	auto& App = Application::Instance();
+
+    App.Init();
 
 	BOOST_CHECK_EQUAL( true, Application::Instance().gui != nullptr );
+	BOOST_CHECK_EQUAL( false, Application::Instance().documents.empty() );
 
 }
 
 
-BOOST_AUTO_TEST_CASE(test_figures) {
+BOOST_AUTO_TEST_CASE( test_new_figures ) {
 
-	Application::Instance().Init();
+	auto& App = Application::Instance();
 
-	Application::Instance().gui -> figuresMenu -> SetActiveFigure( 1 );
+    App.Init();
 
-	Application::Instance().gui -> canva -> AddFigure();
+    MainMenuNew m_menu( App.GetCurrentDocument(), 20, 20, 40, 40 );
 
-	BOOST_CHECK_EQUAL(  );
+    FiguresMenu_Circle circle_menu( App.GetCurrentDocument(), 20, 60, 40, 40 );
 
+    Canvas canvas( App.GetCurrentDocument(), 200, 250, 800, 800 );
 
-	Application::Instance().gui -> figuresMenu -> SetActiveFigure( 2 );
+    // выделяем создание круга
+    App.GetCurrentDocument()->ProcessAction( 25, 65, 0, 0, ActionType::Click );
 
-	Application::Instance().gui -> canva -> AddFigure();
+    // создаём круг через drag´n'drop
+    App.GetCurrentDocument()->ProcessAction( 300, 350, 400, 450, ActionType::DragAndDrop );
 
-	BOOST_CHECK_EQUAL( );
-
-
-	Application::Instance().gui -> canva -> DeleteFigure( 1 );
-	BOOST_CHECK_EQUAL( );
-}
-
-BOOST_AUTO_TEST_CASE(test_save_new_load) {
-
-	Application::Instance().Init();
-
-	Application::Instance().gui -> figuresMenu -> SetActiveFigure( 1 );
-
-	Application::Instance().gui -> canva -> AddFigure();
-
-	Application::Instance().gui -> mainMenu -> SaveDrawing();
-
-	BOOST_CHECK_EQUAL( );
-
-
-	Application::Instance().gui -> canva -> DeleteFigure( 1 );
-
-	Application::Instance().gui -> mainMenu -> LoadDrawing();
-
-	BOOST_CHECK_EQUAL( );
+    // проверяем создание круга
+	BOOST_CHECK_EQUAL( true, true );
 
 }
 
+BOOST_AUTO_TEST_CASE(test_delete_figure) {
+
+	auto& App = Application::Instance();
+
+    App.Init();
+
+    MainMenuNew m_menu( App.GetCurrentDocument(), 20, 20, 40, 40 );
+
+    FiguresMenu_Circle circle_menu( App.GetCurrentDocument(), 20, 60, 40, 40 );
+
+    Canvas canvas( App.GetCurrentDocument(), 200, 250, 800, 800 );
+
+    FiguresMenu_DeleteFigure deleter( App.GetCurrentDocument(), 20, 120, 40, 40 );
+
+    // выделяем создание круга
+    App.GetCurrentDocument()->ProcessAction( 25, 65, 0, 0, ActionType::Click );
+
+    // создаём круг через drag´n'drop
+    App.GetCurrentDocument()->ProcessAction( 300, 350, 400, 450, ActionType::DragAndDrop );
+
+    // выделяем удаление круга
+    App.GetCurrentDocument()->ProcessAction( 25, 130, 0, 0, ActionType::Click );
+
+    // удаляем
+    App.GetCurrentDocument()->ProcessAction( 310, 360, 0, 0, ActionType::Click );
 
 
+	BOOST_CHECK_EQUAL( true, true );
+
+}
+
+BOOST_AUTO_TEST_CASE( test_new ) {
+
+	auto& App = Application::Instance();
+
+    App.Init();
+
+    MainMenuNew m_menu( App.GetCurrentDocument(), 20, 20, 40, 40 );
+
+    FiguresMenu_Circle circle_menu( App.GetCurrentDocument(), 20, 60, 40, 40 );
+
+    Canvas canvas( App.GetCurrentDocument(), 200, 250, 800, 800 );
+
+    FiguresMenu_DeleteFigure deleter( App.GetCurrentDocument(), 20, 120, 40, 40 );
+
+    App.GetCurrentDocument()->ProcessAction( 25, 25, 0, 0, ActionType::Click );
+
+	BOOST_CHECK_EQUAL( true, true );
+
+
+}
+
+BOOST_AUTO_TEST_CASE(test_save) {
+
+	auto& App = Application::Instance();
+
+    App.Init();
+
+    MainMenuNew m_menu( App.GetCurrentDocument(), 20, 20, 40, 40 );
+
+    FiguresMenu_Circle circle_menu( App.GetCurrentDocument(), 20, 60, 40, 40 );
+
+    Canvas canvas( App.GetCurrentDocument(), 200, 250, 800, 800 );
+
+    FiguresMenu_DeleteFigure deleter( App.GetCurrentDocument(), 20, 120, 40, 40 );
+
+    // выделяем создание круга
+    App.GetCurrentDocument()->ProcessAction( 25, 65, 0, 0, ActionType::Click );
+
+    // создаём круг через drag´n'drop
+    App.GetCurrentDocument()->ProcessAction( 300, 350, 400, 450, ActionType::DragAndDrop );
+
+    // вызываем объект сохранения
+
+	// проверяем сохранение документа
+	BOOST_CHECK_EQUAL( true, true );
+
+}
+
+BOOST_AUTO_TEST_CASE( test_load ) {
+
+	auto& App = Application::Instance();
+
+    App.Init();
+
+    // вызываем объект загрузки
+
+    //проверяем загрузку
+    BOOST_CHECK_EQUAL( true, true );
+
+}
 
 BOOST_AUTO_TEST_SUITE_END()
