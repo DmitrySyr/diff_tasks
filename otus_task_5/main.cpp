@@ -36,25 +36,25 @@ int main()
 
     App.Init();
 
-    MainMenuNew m_menu( App.GetCurrentDocument(), 20, 20, 40, 40 );
+    MainMenuNew m_menu( App.GetCurrentDocument(), 20ul, 20ul, 40ul, 40ul );
 
-    FiguresMenu_Circle circle_menu( App.GetCurrentDocument(), 20, 60, 40, 40 );
+    FiguresMenu_Circle circle_menu( App.GetCurrentDocument(), 20ul, 60ul, 40ul, 40ul );
 
-    Canvas canvas( App.GetCurrentDocument(), 200, 250, 800, 800 );
+    Canvas canvas( App.GetCurrentDocument(), 200ul, 250ul, 800ul, 800ul );
 
-    FiguresMenu_DeleteFigure deleter( App.GetCurrentDocument(), 20, 120, 40, 40 );
+    FiguresMenu_DeleteFigure deleter( App.GetCurrentDocument(), 20ul, 120ul, 40ul, 40ul );
 
     // выделяем создание круга
-    App.GetCurrentDocument()->ProcessAction( 25, 65, 0, 0, ActionType::Click );
+    App.GetCurrentDocument()->ProcessAction( 25ul, 65ul, 0ul, 0ul, ActionType::Click );
 
     // создаём круг через drag´n'drop
-    App.GetCurrentDocument()->ProcessAction( 300, 350, 400, 450, ActionType::DragAndDrop );
+    App.GetCurrentDocument()->ProcessAction( 300ul, 350ul, 400ul, 450ul, ActionType::DragAndDrop );
 
     // выделяем удаление круга
-    App.GetCurrentDocument()->ProcessAction( 25, 130, 0, 0, ActionType::Click );
+    App.GetCurrentDocument()->ProcessAction( 25ul, 130ul, 0ul, 0ul, ActionType::Click );
 
     // удаляем
-    App.GetCurrentDocument()->ProcessAction( 310, 360, 0, 0, ActionType::Click );
+    App.GetCurrentDocument()->ProcessAction( 310ul, 360ul, 0ul, 0ul, ActionType::Click );
 
     std::cout << "\nHello world!" << std::endl;
     return 0;

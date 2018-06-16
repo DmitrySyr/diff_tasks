@@ -22,7 +22,7 @@ configure_file (
 
 add_executable(paint main.cpp )
 
-add_library(paint_lib Application.h Document.h Document.cpp Figures.h GUIs.h GUI.cpp Menu.h Menu.cpp Objects.h)
+add_library(paint_lib Application.h Document.h Document.cpp Figures.h GUI.h GUI.cpp Menu.h Menu.cpp Objects.h)
 
 target_link_libraries(paint paint_lib)
 
