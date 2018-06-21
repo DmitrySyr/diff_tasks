@@ -75,7 +75,7 @@ public:
                 }
                 else if( BracesCounter < 0 )
                 {
-                    throw std::invalid_argument( "There is no block to close with '}'.\n" );
+                    throw std::exception();
                 }
             }
             else if(!BracesCounter && --Internal_N == 0 )

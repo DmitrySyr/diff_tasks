@@ -109,7 +109,7 @@ BOOST_AUTO_TEST_CASE ( check_VI )
     ss_in <<    "cmd1\n"
                 "}\n";
 
-    BOOST_CHECK_THROW( receiver.MainLoop( 4, ss_in, ss_out ), std::invalid_argument );
+    BOOST_CHECK_THROW( receiver.MainLoop( 4, ss_in, ss_out ), std::exception );
 }
 
 
@@ -139,9 +139,10 @@ BOOST_AUTO_TEST_CASE ( check_VII )
         std::fstream file;
         std::string file_name( logger->files[i] );
         file.open( file_name, std::ios::in );
+        std::string str;
+
         if(file)
         {
-            std::string str;
             std::getline( file, str );
             file.close();
         }
