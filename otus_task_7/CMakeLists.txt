@@ -39,7 +39,7 @@ set_target_properties(bulk lib bulk_test PROPERTIES
 
 target_compile_definitions(bulk_test PRIVATE BOOST_TEST_DYN_LINK)
 
-target_link_libraries(bulk_test 
+target_link_libraries(bulk_test
   Boost::unit_test_framework
   lib
 )
@@ -58,4 +58,4 @@ include (CPack)
 
 enable_testing()
 
-add_test(bulk_test bulk_tests)
+add_test(bulk_tests bulk_test)

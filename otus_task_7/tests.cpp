@@ -139,9 +139,12 @@ BOOST_AUTO_TEST_CASE ( check_VII )
         std::fstream file;
         std::string file_name( logger->files[i] );
         file.open( file_name, std::ios::in );
-        std::string str;
-        std::getline( file, str );
-        file.close();
+        if(file)
+        {
+            std::string str;
+            std::getline( file, str );
+            file.close();
+        }
 
         BOOST_CHECK_EQUAL ( result[i], str.append( "\n" ) );
     }
