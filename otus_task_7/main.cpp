@@ -16,13 +16,21 @@ int main( int argc, char* argv[] )
         return 1;
     }
 
+    int N;
+
     try
     {
-        int N = std::stoi( argv[1] );
+        N = std::stoi( argv[1] );
     }
     catch(const std::exception& e)
     {
         std::cout << "Program parameter should be a natural.\n";
+    }
+
+    if( N < 1 )
+    {
+        std::cerr << "Program parameter should be not less than one.\n";
+        return 1;
     }
 
     ReceivingBulk receiver;
@@ -35,7 +43,7 @@ int main( int argc, char* argv[] )
 
     try
     {
-        receiver.MainLoop( 2, std::cin, std::cout );
+        receiver.MainLoop( N, std::cin, std::cout );
     }
     catch( const std::exception& e )
     {

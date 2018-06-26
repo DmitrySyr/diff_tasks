@@ -47,8 +47,6 @@ public:
 
         for( std::string line; std::getline(in, line ); )
         {
-            std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
-
             if( line == "{" && !BracesCounter )
             {
                 ++BracesCounter;
@@ -67,7 +65,7 @@ public:
             else if( line == "}" )
             {
                 --BracesCounter;
-                if( BracesCounter == 0 )
+                if( BracesCounter == 0 && !Commands.empty() )
                 {
                     SendNotification( Commands, time, in, out );
                     Commands.erase( Commands.begin(), Commands.end() );
@@ -93,6 +91,8 @@ public:
                 }
                 Commands.push_back( line );
             }
+
+            //std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
         }
 
         if( !Commands.empty() && !BracesCounter )
