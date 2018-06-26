@@ -133,21 +133,20 @@ public:
 
 class LoggingToFile final : public IProcessor {
 
-    bool CheckIfFileExists( std::string fileName ) const
+    std::string CheckIfFileExists( const size_t& time )
     {
         std::fstream file;
 
-        file.open( fileName, std::ios::in );
+        std::string file_name = "bulk" + std::to_string(time) + ".log";
+
+        file.open( file_name, std::ios::in );
 
         if( file )
         {
-            std::cout << "File " << fileName << " is already exists.\n";
-            file.close();
-
-            return 1;
+            return CheckIfFileExists( time + 1 );
         }
 
-        return 0;
+        return file_name;
     }
 
 
@@ -165,12 +164,7 @@ public:
                  , std::istream& in
                  , std::ostream& out ) override
     {
-        std::string file_name = "bulk" + std::to_string(time) + ".log";
-
-        if ( CheckIfFileExists( file_name ) )
-        {
-            return;
-        }
+        std::string file_name = CheckIfFileExists( time );
 
         std::fstream file;
 
