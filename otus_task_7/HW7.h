@@ -10,6 +10,7 @@
 #include <chrono>
 #include <thread>
 #include <exception>
+#include <unistd.h>
 
 class ReceivingBulk;
 
@@ -139,9 +140,9 @@ class LoggingToFile final : public IProcessor {
 
         std::string file_name = "bulk" + std::to_string(time) + ".log";
 
-        file.open( file_name, std::ios::in );
+        //file.open( file_name, std::ios::in );
 
-        if( file )
+        if( access( file_name.c_str(), F_OK ) != -1 )
         {
             return CheckIfFileExists( time + 1 );
         }
