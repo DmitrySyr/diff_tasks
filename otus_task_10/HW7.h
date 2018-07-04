@@ -162,7 +162,7 @@ public:
      {
          while( !line.push( RequestType::WriteToDisk, data, time ) )
          {
-             std::cerr << "Queue is full.\n";
+             //std::cerr << "Queue is full.\n";
          }
      }
 };
