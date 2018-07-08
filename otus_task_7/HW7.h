@@ -11,6 +11,7 @@
 #include <thread>
 #include <exception>
 #include <unistd.h>
+#include <ios>
 
 #define STRING_MAX_SIZE 50
 
