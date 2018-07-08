@@ -222,7 +222,7 @@ public:
 
         if( file.bad() )
         {
-            throw std::system_error( 1, std::iostream_category(), "Can not write to file.\n");
+            throw std::invalid_argument( "Can not write to file.\n" );
         }
     }
 };

@@ -11,7 +11,8 @@ function(tests name)
   COMPILE_OPTIONS -Wpedantic -Wall -Wextra
   COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK)
 
-  target_include_directories(${name} PRIVATE ${PROJECT_SOURCE_DIR})
+  target_include_directories(${name} PRIVATE ${PROJECT_SOURCE_DIR}/otus_task_7)
+target_include_directories(${name} PRIVATE ${PROJECT_SOURCE_DIR}/otus_task_7/tests)
   target_link_libraries (${name} Boost::unit_test_framework lib)
   add_test(${name} ${name})
 endfunction(tests)

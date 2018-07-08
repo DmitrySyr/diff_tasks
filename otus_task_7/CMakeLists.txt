@@ -45,6 +45,6 @@ set(CPACK_PACKAGE_CONTACT dmitry.syr@gmail.com)
 
 include (CPack)
 
-enable_testing()
-
 add_subdirectory(tests)
+
+enable_testing()
