@@ -1,11 +1,19 @@
 cmake_minimum_required(VERSION 3.2)
 
+find_package(Boost COMPONENTS unit_test_framework REQUIRED)
+
 function(tests name)
   add_executable (${name} ${name}.cpp)
-  target_compile_definitions(${name} PRIVATE BOOST_TEST_DYN_LINK BOOST_LOG_DYN_LINK)
+
+  set_target_properties(${name} PROPERTIES
+  CXX_STANDARD 14
+  CXX_STANDARD_REQUIRED ON
+  COMPILE_OPTIONS -Wpedantic -Wall -Wextra
+  COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK)
+
   target_include_directories(${name} PRIVATE ${PROJECT_SOURCE_DIR})
-  target_link_libraries (${name} ${Boost_LIBRARIES})
-  add_test(${name} ${CMAKE_BINARY_DIR}/bin/${name})
+  target_link_libraries (${name} Boost::unit_test_framework lib)
+  add_test(${name} ${name})
 endfunction(tests)
 
 tests(test_output)

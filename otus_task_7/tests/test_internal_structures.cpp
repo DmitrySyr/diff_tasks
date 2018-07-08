@@ -4,7 +4,7 @@
 
 #include "test_header.h"
 
-BOOST_AUTO_TEST_SUITE ( principal_task )
+BOOST_AUTO_TEST_SUITE ( test_internal_structures )
 
 
 

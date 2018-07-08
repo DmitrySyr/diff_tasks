@@ -11,8 +11,6 @@ project(bulk VERSION 0.0.${VERSION_BUILD} LANGUAGES CXX)
 
 #set (PROJECT_VERSION_PATCH "1.0")
 
-find_package(Boost COMPONENTS unit_test_framework REQUIRED)
-
 # configure a header file to pass some of the CMake settings
 # to the source code
 configure_file (
@@ -28,20 +26,11 @@ add_library(lib HW7.h)
 
 target_link_libraries(bulk lib)
 
-add_executable(bulk_test tests.cpp)
-
-set_target_properties(bulk lib bulk_test PROPERTIES
+set_target_properties(bulk lib PROPERTIES
   CXX_STANDARD 14
   CXX_STANDARD_REQUIRED ON
   LINKER_LANGUAGE CXX
   COMPILE_OPTIONS -Wpedantic -Wall -Wextra
-)
-
-target_compile_definitions(bulk_test PRIVATE BOOST_TEST_DYN_LINK)
-
-target_link_libraries(bulk_test
-  Boost::unit_test_framework
-  lib
 )
 
 install(TARGETS bulk RUNTIME DESTINATION bin)
