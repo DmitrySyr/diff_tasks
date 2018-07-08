@@ -58,4 +58,4 @@ include (CPack)
 
 enable_testing()
 
-add_test(bulk_tests bulk_test)
+add_subdirectory(tests)

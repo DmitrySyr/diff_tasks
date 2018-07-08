@@ -11,8 +11,7 @@ int main( int argc, char* argv[] )
 
     if( argc != 2 )
     {
-        std::cout << "The only parameter should be digital(natural) which is commands'"
-                     " block size.\n";
+        std::cout << "Program parameter (commands' block size) should be natural number in [1, 200)\n";
         return 1;
     }
 
@@ -24,25 +23,28 @@ int main( int argc, char* argv[] )
     }
     catch(const std::exception& e)
     {
-        std::cout << "Program parameter should be a natural.\n";
-    }
-
-    if( N < 1 )
-    {
-        std::cerr << "Program parameter should be not less than one.\n";
+        std::cerr << "Program parameter (commands' block size) should be natural number in [1, 200)\n";
         return 1;
     }
 
-    ReceivingBulk receiver;
+    if( N < 1 || N > 199 )
+    {
+        std::cerr << "Program parameter (commands' block size) should be natural number in [1, 200)\n";
+        return 1;
+    }
 
-    auto logger = std::make_shared<LoggingToFile>( );
-    auto shower = std::make_shared<ShowOnDisplay>( );
-
-    receiver.AddProcessor( logger );
-    receiver.AddProcessor( shower );
 
     try
     {
+        ReceivingBulk receiver;
+
+        auto logger = std::make_shared<LoggingToFile>( );
+        auto shower = std::make_shared<ShowOnDisplay>( );
+
+        receiver.AddProcessor( logger );
+        receiver.AddProcessor( shower );
+
+
         receiver.MainLoop( N, std::cin, std::cout );
     }
     catch( const std::exception& e )
