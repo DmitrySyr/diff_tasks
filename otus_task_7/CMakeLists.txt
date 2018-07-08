@@ -27,7 +27,7 @@ add_library(lib HW7.h)
 target_link_libraries(bulk lib)
 
 #target_include_directories(bulk PRIVATE ${PROJECT_SOURCE_DIR}/otus_task_7/tests)
-set(TEST_DIRECTORY ${CMAKE_BINARY_DIR}/otus_task_7/tests)
+#set(TEST_DIRECTORY ${CMAKE_BINARY_DIR}/otus_task_7/bin)
 
 set_target_properties(bulk lib PROPERTIES
   CXX_STANDARD 14
