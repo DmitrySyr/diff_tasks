@@ -13,7 +13,7 @@ function(tests name)
 
   target_include_directories(${name} PRIVATE ${PROJECT_SOURCE_DIR}/otus_task_7)  
   target_link_libraries (${name} Boost::unit_test_framework lib)
-  add_test(NAME ${name} COMMAND ${name})
+  add_test(NAME ${name} COMMAND ${name} WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/otus_task_7/bin)
 endfunction(tests)
 
 tests(test_output)
