@@ -13,7 +13,7 @@ function(tests name)
 
   target_include_directories(${name} PRIVATE ${PROJECT_SOURCE_DIR}/otus_task_7)  
   target_link_libraries (${name} Boost::unit_test_framework lib)
-  add_test(add_test(${name} ${CMAKE_BINARY_DIR}/bin/${name}))
+  add_test(add_test(${name} ${CMAKE_BINARY_DIR}/${name}))
 endfunction(tests)
 
 tests(test_output)
