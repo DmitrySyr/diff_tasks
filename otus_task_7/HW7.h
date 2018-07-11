@@ -14,6 +14,7 @@
 #include <ios>
 
 #define STRING_MAX_SIZE 50
+#define MAX_BLOCK_SIZE 200
 
 enum class State{
     ProcessData
@@ -51,11 +52,38 @@ public:
         processors.push_back( obj );
     }
 
-    void MainLoop(int N, std::istream& in = std::cin, std::ostream& out = std::cout )
+    void MainLoop(std::string N, std::istream& in = std::cin, std::ostream& out = std::cout )
     {
+        int BlockSize;
+
+        try
+        {
+
+            BlockSize = std::stoi( N );
+        }
+        catch(const std::exception& e)
+        {
+            std::stringstream ss;
+            ss << "Program parameter (commands' block size) should be natural number in [1, ";
+            ss << MAX_BLOCK_SIZE;
+            ss << ")\n";
+
+            throw std::invalid_argument( ss.str().c_str() );
+        }
+
+        if( BlockSize < 1 || BlockSize > MAX_BLOCK_SIZE )
+        {
+            std::stringstream ss;
+            ss << "Program parameter (commands' block size) should be natural number in [1, ";
+            ss << MAX_BLOCK_SIZE;
+            ss << ")\n";
+
+            throw std::invalid_argument( ss.str().c_str() );
+        }
+
         int BracesCounter = 0;
         std::vector<std::string> Commands;
-        int Internal_N = N;
+        int Internal_N = BlockSize;
         size_t time = 0;
         State state{State::Wait};
 
@@ -67,16 +95,7 @@ public:
             {
                 throw std::invalid_argument("Incorrect string (too long).\n");
             }
-            else if( line.size() > 1 &&
-                    ( line.find_first_of('{') != std::string::npos
-                     || line.find_first_of('}') != std::string::npos ) )
-            {
-                throw std::invalid_argument("Incorrect command (begins with '{' or '}').\n");
-            }
-            else if( line == "" )
-            {
-                throw std::invalid_argument("Incorrect command (empty).\n");
-            }
+
 
 
             // разбираем входящую строку
@@ -130,7 +149,7 @@ public:
             {
                 SendNotification( Commands, time, out );
                 Commands.erase( Commands.begin(), Commands.end() );
-                Internal_N = N;
+                Internal_N = BlockSize;
             }
         }
 

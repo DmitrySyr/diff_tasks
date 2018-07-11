@@ -20,7 +20,7 @@ BOOST_AUTO_TEST_CASE ( check_I )
 
     receiver.AddProcessor( shower );
 
-    BOOST_CHECK_THROW( receiver.MainLoop( 2, ss_in, ss_out ), std::invalid_argument );
+    BOOST_CHECK_NO_THROW( receiver.MainLoop( "2", ss_in, ss_out ) );
 }
 
 BOOST_AUTO_TEST_CASE ( check_II )
@@ -28,17 +28,9 @@ BOOST_AUTO_TEST_CASE ( check_II )
     std::stringstream ss_in;
     std::stringstream ss_out;
 
-    ss_in << "cmd1\n"
-             "cmd2\n"
-             "cmd3\n"
-             "{\n"
-             "cmd4\n"
-             "cmd5\n"
-             "cmd6123456789123456789123456789123456789123456789123456789\n"
-             "cmd7\n"
-             "}\n";
+    ss_in << std::string( STRING_MAX_SIZE + 1, '0' );
 
-    BOOST_CHECK_THROW( receiver.MainLoop( 3, ss_in, ss_out ), std::invalid_argument );
+    BOOST_CHECK_THROW( receiver.MainLoop( "3", ss_in, ss_out ), std::invalid_argument );
 }
 
 BOOST_AUTO_TEST_CASE ( check_III )
@@ -57,7 +49,7 @@ BOOST_AUTO_TEST_CASE ( check_III )
                 "cmd6\n"
                 "}\n";
 
-    BOOST_CHECK_THROW( receiver.MainLoop( 3, ss_in, ss_out ), std::invalid_argument );
+    BOOST_CHECK_NO_THROW( receiver.MainLoop( "3", ss_in, ss_out ) );
 }
 
 BOOST_AUTO_TEST_CASE ( check_IV )
@@ -71,7 +63,7 @@ BOOST_AUTO_TEST_CASE ( check_IV )
                 "}cmd3\n"
                 "cmd4\n";
 
-    BOOST_CHECK_THROW( receiver.MainLoop( 3, ss_in, ss_out ), std::invalid_argument );
+    BOOST_CHECK_NO_THROW( receiver.MainLoop( "3", ss_in, ss_out ) );
 }
 
 BOOST_AUTO_TEST_CASE ( check_V )
@@ -81,7 +73,7 @@ BOOST_AUTO_TEST_CASE ( check_V )
 
     ss_in << "cmd1}\n";
 
-    BOOST_CHECK_THROW( receiver.MainLoop( 3, ss_in, ss_out ), std::invalid_argument );
+    BOOST_CHECK_NO_THROW( receiver.MainLoop( "3", ss_in, ss_out ) );
 
 }
 
@@ -93,46 +85,31 @@ BOOST_AUTO_TEST_CASE ( check_VI )
     ss_in <<    "cmd1\n"
                 "}\n";
 
-    BOOST_CHECK_THROW( receiver.MainLoop( 4, ss_in, ss_out ), std::invalid_argument );
+    BOOST_CHECK_THROW( receiver.MainLoop( "4", ss_in, ss_out ), std::invalid_argument );
 }
-
 
 BOOST_AUTO_TEST_CASE ( check_VII )
 {
     std::stringstream ss_in;
     std::stringstream ss_out;
 
-    receiver.AddProcessor( logger );
-
     ss_in <<    "cmd1\n"
-                "cmd2\n"
-                "{\n"
-                "cmd3\n"
-                "cmd4\n"
-                "cmd5\n"
                 "}\n";
 
-    receiver.MainLoop( 2, ss_in, ss_out );
-
-    std::vector<std::string> result;
-    result.push_back( "bulk: cmd1, cmd2\n");
-    result.push_back( "bulk: cmd3, cmd4, cmd5\n" );
-
-    for(int i = 0; i != 2; ++i )
-    {
-        std::fstream file;
-        std::string file_name( logger->files[i] );
-        file.open( file_name, std::ios::in );
-        std::string str;
-
-        if(file)
-        {
-            std::getline( file, str );
-            file.close();
-        }
-
-        BOOST_CHECK_EQUAL ( result[i], str.append( "\n" ) );
-    }
+    BOOST_CHECK_THROW( receiver.MainLoop( "-1", ss_in, ss_out ), std::invalid_argument );
 }
+
+BOOST_AUTO_TEST_CASE ( check_VIII )
+{
+    std::stringstream ss_in;
+    std::stringstream ss_out;
+
+    ss_in <<    "cmd1\n"
+                "}\n";
+
+    BOOST_CHECK_THROW( receiver.MainLoop( std::to_string( MAX_BLOCK_SIZE)
+                                         , ss_in, ss_out ), std::invalid_argument );
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 

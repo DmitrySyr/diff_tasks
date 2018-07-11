@@ -4,7 +4,7 @@
 
 #include "test_header.h"
 
-BOOST_AUTO_TEST_SUITE ( test_principal_task )
+BOOST_AUTO_TEST_SUITE ( principal_task )
 
     ReceivingBulk receiver;
 
@@ -20,7 +20,7 @@ BOOST_AUTO_TEST_CASE ( check_I )
 
     receiver.AddProcessor( shower );
 
-    receiver.MainLoop( 2, ss_in, ss_out );
+    receiver.MainLoop( "2", ss_in, ss_out );
 
     BOOST_CHECK_EQUAL ( ss_out.str(), "bulk: cmd1, cmd2\nbulk: cmd3, cmd4\nbulk: cmd5\n" );
 }
@@ -40,7 +40,7 @@ BOOST_AUTO_TEST_CASE ( check_II )
              "cmd7\n"
              "}\n";
 
-    receiver.MainLoop( 3, ss_in, ss_out );
+    receiver.MainLoop( "3", ss_in, ss_out );
 
     BOOST_CHECK_EQUAL ( ss_out.str(), "bulk: cmd1, cmd2, cmd3\nbulk: cmd4, cmd5, cmd6, cmd7\n" );
 }
@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_CASE ( check_III )
                 "cmd6\n"
                 "}\n";
 
-    receiver.MainLoop( 3, ss_in, ss_out );
+    receiver.MainLoop( "3", ss_in, ss_out );
 
     BOOST_CHECK_EQUAL ( ss_out.str(), "bulk: cmd1, cmd2, cmd3, cmd4, cmd5, cmd6\n" );
 }
@@ -77,7 +77,7 @@ BOOST_AUTO_TEST_CASE ( check_IV )
                 "cmd3\n"
                 "cmd4\n";
 
-    receiver.MainLoop( 4, ss_in, ss_out );
+    receiver.MainLoop( "4", ss_in, ss_out );
 
     BOOST_CHECK_EQUAL ( ss_out.str(), "bulk: cmd1, cmd2\n" );
 }
@@ -89,11 +89,30 @@ BOOST_AUTO_TEST_CASE ( check_V )
 
     ss_in <<    "cmd1\n";
 
-    receiver.MainLoop( 4, ss_in, ss_out );
+    receiver.MainLoop( "4", ss_in, ss_out );
 
     BOOST_CHECK_EQUAL ( ss_out.str(), "bulk: cmd1\n" );
 
 }
+
+BOOST_AUTO_TEST_CASE ( check_VI )
+{
+    std::stringstream ss_in;
+    std::stringstream ss_out;
+
+    ss_in <<    "cmd1\n"
+                "cmd2\n"
+                "{\n"
+                "}cmd3\n"
+                "cmd4\n"
+                "}";
+
+    receiver.MainLoop( "4", ss_in, ss_out );
+
+    BOOST_CHECK_EQUAL( ss_out.str(), "bulk: cmd1, cmd2\nbulk: }cmd3, cmd4\n" );
+
+}
+
 
 BOOST_AUTO_TEST_SUITE_END()
 

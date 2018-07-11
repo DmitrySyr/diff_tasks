@@ -26,7 +26,7 @@ BOOST_AUTO_TEST_CASE ( check_I )
                 "cmd5\n"
                 "}\n";
 
-    receiver.MainLoop( 2, ss_in, ss_out );
+    receiver.MainLoop( "2", ss_in, ss_out );
 
     std::vector<std::string> result;
     result.push_back( "bulk: cmd1, cmd2\n");

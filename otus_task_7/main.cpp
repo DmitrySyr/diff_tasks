@@ -15,23 +15,9 @@ int main( int argc, char* argv[] )
         return 1;
     }
 
-    int N;
 
-    try
-    {
-        N = std::stoi( argv[1] );
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << "Program parameter (commands' block size) should be natural number in [1, 200)\n";
-        return 1;
-    }
 
-    if( N < 1 || N > 199 )
-    {
-        std::cerr << "Program parameter (commands' block size) should be natural number in [1, 200)\n";
-        return 1;
-    }
+
 
 
     try
@@ -45,7 +31,7 @@ int main( int argc, char* argv[] )
         receiver.AddProcessor( shower );
 
 
-        receiver.MainLoop( N, std::cin, std::cout );
+        receiver.MainLoop( argv[1], std::cin, std::cout );
     }
     catch( const std::exception& e )
     {
