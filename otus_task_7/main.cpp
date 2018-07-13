@@ -11,14 +11,9 @@ int main( int argc, char* argv[] )
 
     if( argc != 2 )
     {
-        std::cout << "Program parameter (commands' block size) should be natural number in [1, 200)\n";
+        std::cout << "Program parameter (commands' block size) should be natural number.\n";
         return 1;
     }
-
-
-
-
-
 
     try
     {

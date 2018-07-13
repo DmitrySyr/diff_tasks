@@ -93,10 +93,8 @@ public:
             // проверка валидности строки
             if( line.size() > STRING_MAX_SIZE )
             {
-                throw std::invalid_argument("Incorrect string (too long).\n");
+                throw std::invalid_argument("Incorrect command (too long).\n");
             }
-
-
 
             // разбираем входящую строку
             if( line == "{" )
@@ -132,6 +130,13 @@ public:
             else if(!BracesCounter && --Internal_N == 0 )
             {
                 Commands.push_back( line );
+
+                // в случае блока из одной команды, мы должны записать время здесь
+                if( !time )
+                {
+                    time = std::time( nullptr );
+                }
+
                 state = State::ProcessData;
             }
             else
@@ -150,6 +155,7 @@ public:
                 SendNotification( Commands, time, out );
                 Commands.erase( Commands.begin(), Commands.end() );
                 Internal_N = BlockSize;
+                time = 0;
             }
         }
 
@@ -157,8 +163,6 @@ public:
         {
             SendNotification( Commands, time, out );
         }
-
-
     }
 
     void SendNotification( const std::vector<std::string>& vec
@@ -178,7 +182,6 @@ public:
                 it = processors.erase( it );
             }
         }
-        time = 0;
     }
 };
 
@@ -186,23 +189,6 @@ public:
 // ******************************************************************************
 
 class LoggingToFile final : public IProcessor {
-
-    std::string CheckIfFileExists( const size_t& time, size_t add = 0 )
-    {
-        std::fstream file;
-
-        std::string file_name = "bulk" + std::to_string(time) + "_" + std::to_string( add ) + ".log";
-
-        //file.open( file_name, std::ios::in );
-
-        if( access( file_name.c_str(), F_OK ) != -1 )
-        {
-            return CheckIfFileExists( time, ++add );
-        }
-
-        return file_name;
-    }
-
 
 
 public:
@@ -217,31 +203,45 @@ public:
                  , const size_t& time
                  , std::ostream& out ) override
     {
-        std::string file_name = CheckIfFileExists( time );
-
+        int add = 0;
         std::fstream file;
 
-        file.open( file_name, std::ios::out );
+        std::string file_name = "bulk" + std::to_string(time) + "_" + std::to_string( add ) + ".log";
 
-        files.push_back( file_name );
+        file.open( file_name, std::ios::in );
 
-        file << "bulk: ";
-
-        for( auto it = data.begin(); it != data.end(); ++it )
+        while( std::fstream file{ file_name, std::ios::in } )
         {
-            if( it != data.begin() )
-            {
-                file << ", ";
-            }
-
-            file << *it;
+            file.close();
+            ++add;
+            file_name = "bulk" + std::to_string(time) + "_" + std::to_string( add ) + ".log";
         }
 
         file.close();
 
-        if( file.bad() )
+
+        if( std::fstream file{ file_name, std::ios::out } )
         {
-            throw std::invalid_argument( "Can not write to file.\n" );
+            files.push_back( file_name );
+
+            file << "bulk: ";
+
+            for( auto it = data.begin(); it != data.end(); ++it )
+            {
+                if( it != data.begin() )
+                {
+                    file << ", ";
+                }
+
+                file << *it;
+            }
+
+            file << std::endl;
+
+            if( file.fail() )
+            {
+                throw std::invalid_argument( "Can not write to file.\n" );
+            }
         }
     }
 };
