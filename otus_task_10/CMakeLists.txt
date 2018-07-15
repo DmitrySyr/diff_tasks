@@ -29,14 +29,15 @@ add_library(lib HW7.h Processor.h Queue.h)
 
 target_link_libraries(bulkmt lib ${CMAKE_THREAD_LIBS_INIT})
 
+set(LINKER_FLAGS "-lstdc++fs -pthreads")
+set(CMAKE_SHARED_LINKER_FLAGS ${LINKER_FLAGS})
+
 set_target_properties(bulkmt lib PROPERTIES
   CXX_STANDARD 14
   CXX_STANDARD_REQUIRED ON
   LINKER_LANGUAGE CXX
   COMPILE_OPTIONS -Wpedantic -Wall -Wextra
 )
-
-SET( CMAKE_EXE_LINKER_FLAGS  "-lstdc++fs" )
 
 install(TARGETS bulkmt RUNTIME DESTINATION bin)
 
