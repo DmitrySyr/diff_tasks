@@ -10,20 +10,27 @@ BOOST_AUTO_TEST_SUITE ( principal_task )
 
 BOOST_AUTO_TEST_CASE ( check_I )
 {
-    ReceivingBulk receiver;
+    // Инициализируем основной объект для получения и распределения данных
+    auto receiver = std::make_shared<ReceivingBulk>( std::cout );
 
-    auto logger = std::make_shared<LoggingToFile>( );
-    auto shower = std::make_shared<ShowOnDisplay>( );
+    // Инициализируем очередь для потоков под запись в файл
+    auto LineToDisk    = std::make_shared<Queue>();
+    auto LineToConsole = std::make_shared<Queue>();
 
-    BOOST_CHECK_EQUAL ( receiver.GetNumberOfSubscribers(), 0 );
+    // Инициализируем два объекта, которые будут получать оповещения
+    // и отправлять данные в потоки
+    auto logger = std::make_shared<LoggingToFile>( *LineToDisk.get() );
+    auto shower = std::make_shared<ShowOnDisplay>( *LineToConsole.get() );
 
-    receiver.AddProcessor( shower );
+    BOOST_CHECK_EQUAL ( receiver->GetNumberOfSubscribers(), 0 );
 
-    BOOST_CHECK_EQUAL ( receiver.GetNumberOfSubscribers(), 1 );
+    receiver->AddProcessor( shower );
 
-    receiver.AddProcessor( logger );
+    BOOST_CHECK_EQUAL ( receiver->GetNumberOfSubscribers(), 1 );
 
-    BOOST_CHECK_EQUAL ( receiver.GetNumberOfSubscribers(), 2 );
+    receiver->AddProcessor( logger );
+
+    BOOST_CHECK_EQUAL ( receiver->GetNumberOfSubscribers(), 2 );
 }
 
 BOOST_AUTO_TEST_SUITE_END()
