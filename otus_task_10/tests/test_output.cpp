@@ -8,6 +8,8 @@ BOOST_AUTO_TEST_SUITE ( test_output )
 
 auto test_helper_logger( std::istream& in, std::ostream& out, std::string n )
 {
+    std::vector<std::exception_ptr> exc;
+
     auto receiver = std::make_shared<ReceivingBulk>( std::cout );
 
     // Инициализируем очередь для потоков под запись в файл
@@ -21,9 +23,9 @@ auto test_helper_logger( std::istream& in, std::ostream& out, std::string n )
 
     receiver->AddProcessor( logger );
 
-    auto pr1 = std::make_shared<Processor>( LineToDisk, out, true );
-    auto pr2 = std::make_shared<Processor>( LineToDisk, out, true );
-    auto pr3 = std::make_shared<Processor>( LineToConsole, out );
+    auto pr1 = std::make_shared<Processor>( LineToDisk, exc, out, true );
+    auto pr2 = std::make_shared<Processor>( LineToDisk, exc, out, true );
+    auto pr3 = std::make_shared<Processor>( LineToConsole, exc, out );
 
     std::thread th1( &Processor::Loop, pr1 );
     std::thread th2( &Processor::Loop, pr2 );

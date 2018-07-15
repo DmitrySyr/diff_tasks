@@ -10,6 +10,8 @@ BOOST_AUTO_TEST_SUITE ( principal_task )
 
 BOOST_AUTO_TEST_CASE ( check_I )
 {
+    std::vector<std::exception_ptr> exc;
+
     // Инициализируем основной объект для получения и распределения данных
     auto receiver = std::make_shared<ReceivingBulk>( std::cout );
 
