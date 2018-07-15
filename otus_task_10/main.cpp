@@ -8,8 +8,6 @@
 #include "HW7.h"
 #include "Queue.h"
 #include "Processor.h"
-#include "th_wrapper.h"
-
 
 int main( int argc, char* argv[] )
 {
