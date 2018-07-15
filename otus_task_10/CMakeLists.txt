@@ -27,10 +27,7 @@ add_executable(bulkmt main.cpp )
 
 add_library(lib HW7.h Processor.h Queue.h)
 
-target_link_libraries(bulkmt lib ${CMAKE_THREAD_LIBS_INIT})
-
-set(LINKER_FLAGS "-lstdc++fs")
-set(CMAKE_SHARED_LINKER_FLAGS ${LINKER_FLAGS})
+target_link_libraries(bulkmt lib ${CMAKE_THREAD_LIBS_INIT} stdc++fs)
 
 set_target_properties(bulkmt lib PROPERTIES
   CXX_STANDARD 14
