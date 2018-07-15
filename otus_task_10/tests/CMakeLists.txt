@@ -15,7 +15,7 @@ function(tests name)
   target_include_directories(${name} PRIVATE ${PROJECT_SOURCE_DIR})
   target_link_libraries(${name} ${CMAKE_THREAD_LIBS_INIT})
   target_link_libraries (${name} Boost::unit_test_framework lib)
-  add_test(${name} COMMAND ${name})
+  add_test(${name} ${name})
 endfunction(tests)
 
 tests(test_output)
