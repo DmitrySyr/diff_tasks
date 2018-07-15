@@ -13,6 +13,14 @@
 
 #include "Queue.h"
 
+#define STRING_MAX_SIZE 50
+#define MAX_BLOCK_SIZE 50
+
+enum class State{
+    ProcessData
+    , Wait
+};
+
 
 class ReceivingBulk;
 
@@ -22,7 +30,7 @@ public:
 
     virtual ~IProcessor(){}
 
-    virtual void process( const std::vector<std::string>&
+    virtual void process( const std::string&
                          , const size_t& ) = 0;
 };
 
@@ -35,13 +43,31 @@ class ReceivingBulk{
     size_t AllLines = 0;
     size_t AllBlocks = 0;
     size_t AllCommands = 0;
-
     std::ostream& out;
+
+    size_t countCommands( std::string& data )
+    {
+        size_t counter{0};
+        size_t pos{0};
+
+        if( data == "" ) { return 0;}
+
+        while( data.find_first_of( ',', pos ) != std::string::npos )
+        {
+            ++counter;
+            pos = data.find_first_of( ',', pos ) + 1;
+        }
+
+        return counter + 1;
+    }
 
 public:
 
     ReceivingBulk() = delete;
     ReceivingBulk( std::ostream& out = std::cout ) : out( out ) {}
+
+    ReceivingBulk( const ReceivingBulk& ) = delete;
+    ReceivingBulk& operator=( const ReceivingBulk& ) = delete;
 
     void PrintStatistics() const
     {
@@ -49,64 +75,118 @@ public:
         << AllBlocks << " blocks, " << AllCommands << " commands.\n";
     }
 
+    size_t GetNumberOfSubscribers()
+    {
+        return processors.size();
+    }
+
     void AddProcessor( std::shared_ptr<IProcessor> obj)
     {
         processors.push_back( obj );
     }
 
-    void MainLoop(int N, std::istream& in = std::cin )
+    void MainLoop(std::string N, std::istream& in = std::cin, std::ostream& out = std::cout )
     {
+        int BlockSize;
+
+        try
+        {
+            BlockSize = std::stoi( N );
+        }
+        catch(const std::exception& e)
+        {
+            std::stringstream ss;
+            ss << "Program parameter (commands' block size) should be natural number in [1, ";
+            ss << MAX_BLOCK_SIZE;
+            ss << ")\n";
+
+            throw std::invalid_argument( ss.str().c_str() );
+        }
+
+        if( BlockSize < 1 || BlockSize > MAX_BLOCK_SIZE )
+        {
+            std::stringstream ss;
+            ss << "Program parameter (commands' block size) should be natural number in [1, ";
+            ss << MAX_BLOCK_SIZE;
+            ss << ")\n";
+
+            throw std::invalid_argument( ss.str().c_str() );
+        }
+
         int BracesCounter = 0;
-        std::vector<std::string> Commands;
-        int Internal_N = N;
+        std::string Commands;
+        int Internal_N = BlockSize;
         size_t time = 0;
+        State state{State::Wait};
+
 
         for( std::string line; std::getline(in, line ); )
         {
             ++AllLines;
-            if( line == "{" && !BracesCounter )
+            // проверка валидности строки
+            if( line.size() > STRING_MAX_SIZE )
             {
-                ++BracesCounter;
+                throw std::invalid_argument("Incorrect string (too long).\n");
+            }
 
-                if( !Commands.empty() )
+            // разбираем входящую строку
+            if( line == "{" )
+            {
+                if( !BracesCounter && Commands != "" )
                 {
-                    SendNotification( Commands, time );
+                    state = State::ProcessData;
+                }
+                else
+                {
+                    state = State::Wait;
                 }
 
-                Commands.erase( Commands.begin(), Commands.end() );
-            }
-            else if( line == "{" )
-            {
                 ++BracesCounter;
             }
             else if( line == "}" )
             {
                 --BracesCounter;
-                if( BracesCounter == 0 && !Commands.empty() )
+
+                if( BracesCounter == 0 && Commands != "" )
                 {
-                    SendNotification( Commands, time );
-                    Commands.erase( Commands.begin(), Commands.end() );
-                    Internal_N = N;
+                    state = State::ProcessData;
                 }
                 else if( BracesCounter < 0 )
                 {
-                    throw std::exception();
+                    throw std::invalid_argument("Incorrect symbol '}' outside any block.\n");
+                }
+                else
+                {
+                    state = State::Wait;
                 }
             }
             else if(!BracesCounter && --Internal_N == 0 )
             {
-                Commands.push_back( line );
-                SendNotification( Commands, time );
-                Commands.erase( Commands.begin(), Commands.end() );
-                Internal_N = N;
+                Commands.append( line + ", " );
+
+                if( !time )
+                {
+                    time = std::time( nullptr );
+                }
+
+                state = State::ProcessData;
             }
             else
             {
                 if( !time )
                 {
-                    time = GetCurrentTime();
+                    time = std::time( nullptr );
                 }
-                Commands.push_back( line );
+
+                Commands.append( line + ", " );
+                state = State::Wait;
+            }
+
+            if( state == State::ProcessData )
+            {
+                SendNotification( Commands, time );
+                Commands.clear();
+                Internal_N = BlockSize;
             }
         }
 
@@ -116,18 +196,21 @@ public:
         }
     }
 
-    void SendNotification( const std::vector<std::string>& vec
-                          , size_t& time )
+    void SendNotification( const std::string& str
+                          , size_t time )
     {
+        std::string data{( str.find_last_of(',') != std::string::npos ) ?
+                                                            str.substr( 0, str.find_last_of(',') )
+                                                            : str};
         ++AllBlocks;
-        AllCommands += vec.size();
+        AllCommands += countCommands( data );
 
         for( auto it = processors.begin(); it != processors.end(); )
         {
             auto ptr = (*it).lock();
             if( ptr )
             {
-                ptr->process( vec, time );
+                ptr->process( data, time );
                 ++it;
             }
             else
@@ -136,11 +219,6 @@ public:
             }
         }
         time = 0;
-    }
-
-    size_t GetCurrentTime()
-    {
-        return std::time( nullptr );
     }
 };
 
@@ -157,13 +235,10 @@ public:
 
     LoggingToFile( const LoggingToFile& ) = delete;
 
-    void process( const std::vector<std::string>& data
+    void process( const std::string& data
                  , const size_t& time ) override
      {
-         while( !line.push( RequestType::WriteToDisk, data, time ) )
-         {
-             //std::cerr << "Queue is full.\n";
-         }
+         line.push( RequestType::WriteToDisk, data, time );
      }
 };
 
@@ -173,122 +248,20 @@ public:
 
 class ShowOnDisplay final : public IProcessor {
 
-    std::vector<std::vector<std::string>> data;
-
-    std::mutex PrintToConsoleMutex;
-    std::condition_variable PrintQueue;
-
-    std::ostream& out;
-
-    size_t BlocksQuantity = 0;
-    size_t CommandsQuantity = 0;
-
-    std::thread th3;
-
-    bool ToWorkOrNotToWork = true;
-    bool ProcessData = true;
-
-
+    Queue& line;
 
 public:
 
-    ShowOnDisplay( std::ostream& out = std::cout ) : out( out )
-    {
-        th3 = std::thread( &ShowOnDisplay::ImplementOutputConsole, this );
-    }
+    ShowOnDisplay( Queue& line_object ) : line( line_object ){}
 
     ShowOnDisplay( const ShowOnDisplay& ) = delete;
 
-    ~ShowOnDisplay()
-    {
-        ProcessData = false;
-        ToWorkOrNotToWork = false;
+    ~ShowOnDisplay(){}
 
-        {
-            std::lock_guard<std::mutex> lock( PrintToConsoleMutex );
-            data.push_back({""});
-        }
-
-        PrintQueue.notify_one();
-        th3.join();
-    }
-
-    void process( const std::vector<std::string>& new_data
+    void process( const std::string& data
                  , const size_t& time ) override
      {
-        {
-            std::lock_guard<std::mutex> lock( PrintToConsoleMutex );
-            if( DEBUG && !data.empty() )
-            {
-                std::cerr << "Data is not empty!\n";
-            }
-
-            data.push_back( new_data );
-        }
-
-        PrintQueue.notify_one();
+         line.push( RequestType::WriteToConsole, data, time );
      }
-
-    void ImplementOutputConsole( )
-    {
-        while( ToWorkOrNotToWork )
-        {
-            std::unique_lock<std::mutex> lk( PrintToConsoleMutex );
-
-            PrintQueue.wait( lk, [this]()
-                            {
-                                return ( !this->data.empty() );
-                            });
-
-            if( DEBUG )
-            {
-                std::cout << "Received parameters are: \n" <<
-                            "ProcessData is " << ProcessData << "\n" <<
-                            "data size is " << data.size() << "\n";
-            }
-
-            if( ProcessData || data.size() > 1 )
-            {
-
-                if( !ProcessData )
-                {
-                    data.erase( --data.end(), data.end() );
-                }
-
-
-
-
-                for( const auto& d : data )
-                {
-                    out << "bulk: ";
-
-                    ++BlocksQuantity;
-
-                    CommandsQuantity += d.size();
-
-                    for( auto it = d.begin(); it != d.end(); ++it )
-                    {
-                        if( it != d.begin() )
-                        {
-                            out << ", ";
-                        }
-
-                        out << *it;
-                    }
-                    out << "\n";
-                }
-
-
-                data.erase( data.begin(), data.end() );
-            }
-        }
-    }
-
-    void PrintStatistics()
-    {
-        std::lock_guard<std::mutex> lock( PrintToConsoleMutex );
-
-        out << "Log thread: " << BlocksQuantity << " blocks and "<< CommandsQuantity << " commands.\n";
-    }
 };
 #endif // HW7_H_INCLUDED

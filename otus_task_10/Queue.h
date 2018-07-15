@@ -1,7 +1,7 @@
 #ifndef QUEUE_H_INCLUDED
 #define QUEUE_H_INCLUDED
 
-#include <vector>
+#include <deque>
 #include <exception>
 #include <tuple>
 #include <functional>
@@ -12,6 +12,7 @@
 
 enum class RequestType{
     WriteToDisk
+    , WriteToConsole
     , Quit
 };
 
@@ -20,7 +21,12 @@ class Queue{
 
 public:
 
-    using QueueElement = std::tuple<RequestType, std::vector<std::string>, size_t>;
+    size_t Pushing{0};
+    size_t Popping{0};
+
+    std::atomic<size_t> file_id{0};
+
+    using QueueElement = std::tuple<RequestType, std::string, size_t>;
 
     Queue( const Queue& )            = delete;
     Queue( Queue&& )                 = delete;
@@ -28,76 +34,43 @@ public:
     Queue& operator=( Queue&& )      = delete;
 
     std::mutex queue_lock;
+    std::mutex write_mutex;
+    std::condition_variable goAhead;
 
-    std::condition_variable queue_is_not_empty;
+    Queue( ) : m_container( {} ){}
 
-    Queue( size_t sizeQueue ) : m_container( sizeQueue + 1 )
+    void push( const RequestType request, const std::string& data, const size_t time )
     {
-        if( !sizeQueue )
-        {
-            throw std::invalid_argument( "The queue size should be > 0.\n" );
-        }
-    }
 
-    bool push( RequestType request, const std::vector<std::string>& data, size_t time )
-    {
         {
             std::lock_guard<std::mutex> lk( queue_lock );
 
+            m_container.push_back( std::make_tuple( request, data, time ) );
 
-            if(  m_popPos == incrementPosition( m_pushPos ) )
-            {
-                return false;
-            }
-
-
-            if( DEBUG ) { std::cout << "Inside the push with thread id : " << std::this_thread::get_id() << " \n";}
-            if( DEBUG ) { std::cout << "m_pushPos is " << m_pushPos << "\n";}
-
-            auto& item = m_container.at(m_pushPos);
-            item = std::make_tuple( request, data, time );
-
-            if( DEBUG ) { std::cout << "Pushing data: " << (int)request << " and time " << time << "\n";}
-
-            m_pushPos = this->incrementPosition( m_pushPos );
+            ++Pushing;
         }
 
-        queue_is_not_empty.notify_one();
-
-        return true;
+        goAhead.notify_one();
     }
 
-    QueueElement pop()
+    void pop( RequestType& state, std::string& data, size_t& time )
     {
         std::unique_lock<std::mutex> lk( queue_lock );
 
-        queue_is_not_empty.wait( lk, [this]()
-                                {
-                                    return ( this->incrementPosition( this->m_popPos ) !=  this->m_pushPos );
-                                } );
+        goAhead.wait( lk, [this]
+                     {
+                         return !m_container.empty();
+                     } );
 
-        m_popPos = incrementPosition( m_popPos );
+        std::tie( state, data, time ) = m_container.front();
+        m_container.pop_front();
 
-        if( DEBUG ) { std::cout << "Inside the pop with thread id : " << std::this_thread::get_id() << " \n";}
-
-        if( DEBUG ) {std::cout << "m_popPos is " << m_popPos << "\n";}
-
-        auto tmp = m_container.at(m_popPos);
-
-        if( DEBUG ) { std::cout << "Poping data: " << (int)std::get<0>( tmp ) << "\n";}
-
-        lk.unlock();
-
-        return tmp;
+        ++Popping;
     }
 
-
 private:
-    std::vector<QueueElement> m_container;
-    size_t m_popPos = {0};
-    size_t m_pushPos = {1};
+    std::deque<QueueElement> m_container;
 
-    size_t incrementPosition(size_t pos) { return (pos != m_container.size() - 1) ? pos + 1 : 0; }
 };
 
 #endif // QUEUE_H_INCLUDED

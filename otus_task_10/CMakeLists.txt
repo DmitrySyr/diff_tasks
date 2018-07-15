@@ -29,21 +29,11 @@ add_library(lib HW7.h Processor.h Queue.h)
 
 target_link_libraries(bulkmt lib ${CMAKE_THREAD_LIBS_INIT})
 
-add_executable(bulkmt_test tests.cpp)
-
-set_target_properties(bulkmt lib bulkmt_test PROPERTIES
+set_target_properties(bulkmt lib PROPERTIES
   CXX_STANDARD 14
   CXX_STANDARD_REQUIRED ON
   LINKER_LANGUAGE CXX
   COMPILE_OPTIONS -Wpedantic -Wall -Wextra
-)
-
-target_compile_definitions(bulkmt_test PRIVATE BOOST_TEST_DYN_LINK)
-
-target_link_libraries(bulkmt_test
-  Boost::unit_test_framework
-  lib
-  ${CMAKE_THREAD_LIBS_INIT}
 )
 
 install(TARGETS bulkmt RUNTIME DESTINATION bin)
@@ -60,4 +50,4 @@ include (CPack)
 
 enable_testing()
 
-add_test(bulk_tests bulkmt_test)
+add_subdirectory(tests)

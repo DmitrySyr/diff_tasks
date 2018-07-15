@@ -8,6 +8,7 @@
 #include "HW7.h"
 #include "Queue.h"
 #include "Processor.h"
+#include "th_wrapper.h"
 
 
 int main( int argc, char* argv[] )
@@ -15,67 +16,66 @@ int main( int argc, char* argv[] )
 
     if( argc != 2 )
     {
-        std::cout << "Program parameter (commands' block size) should be natural number in [1, inf).\n";
-        return 1;
-    }
-
-    int N;
-
-    try
-    {
-        N = std::stoi( argv[1] );
-    }
-    catch(const std::exception& e)
-    {
-        std::cout << "Program parameter (commands' block size) should be natural number in [1, inf).\n";
-        return 1;
-    }
-
-    if( N < 1 )
-    {
-        std::cerr << "Program parameter (commands' block size) should be natural number in [1, inf).\n";
+        std::cout << "Program parameter (commands' block size) should be natural number.\n";
         return 1;
     }
 
     try
     {
         // Инициализируем основной объект для получения и распределения данных
-        ReceivingBulk receiver( std::cout );
+        auto receiver = std::make_shared<ReceivingBulk>( std::cout );
 
         // Инициализируем очередь для потоков под запись в файл
-        auto LineToDisk    = std::make_shared<Queue>( 500 );
+        auto LineToDisk    = std::make_shared<Queue>();
+        auto LineToConsole = std::make_shared<Queue>();
 
         // Инициализируем два объекта, которые будут получать оповещения
         // и отправлять данные в потоки
         auto logger = std::make_shared<LoggingToFile>( *LineToDisk.get() );
-        auto shower = std::make_shared<ShowOnDisplay>( );
+        auto shower = std::make_shared<ShowOnDisplay>( *LineToConsole.get() );
 
-        receiver.AddProcessor( logger );
-        receiver.AddProcessor( shower );
+        receiver->AddProcessor( logger );
+        receiver->AddProcessor( shower );
 
-        auto pr1 = std::make_shared<Processor>( *LineToDisk.get() );
-        auto pr2 = std::make_shared<Processor>( *LineToDisk.get() );
+        auto pr1 = std::make_shared<Processor>( LineToDisk );
+        auto pr2 = std::make_shared<Processor>( LineToDisk );
+        auto pr3 = std::make_shared<Processor>( LineToConsole );
 
-        std::thread th1( &Processor::Loop, pr1.get() );
-        std::thread th2( &Processor::Loop, pr2.get() );
+        std::thread th1( &Processor::Loop, pr1 );
+        std::thread th2( &Processor::Loop, pr2 );
+        std::thread th3( &Processor::Loop, pr3 );
 
-        receiver.MainLoop( N, std::cin );
+        try
+        {
+            receiver->MainLoop( argv[1], std::cin );
+        }
+        catch( std::exception& e )
+        {
+            LineToDisk->push( RequestType::Quit, std::string{}, 0 );
+            LineToDisk->push( RequestType::Quit, std::string{}, 0 );
+            LineToConsole->push( RequestType::Quit, std::string{}, 0 );
 
-        LineToDisk->push( RequestType::Quit, std::vector<std::string>{}, 0 );
-        LineToDisk->push( RequestType::Quit, std::vector<std::string>{}, 0 );
+            th1.join();
+            th2.join();
+            th3.join();
+
+            std::cout << e.what();
+        }
+
+
+        LineToDisk->push( RequestType::Quit, std::string{}, 0 );
+        LineToDisk->push( RequestType::Quit, std::string{}, 0 );
+        LineToConsole->push( RequestType::Quit, std::string{}, 0 );
 
         th1.join();
         th2.join();
+        th3.join();
 
-        // ставим паузу в выводе статистик, чтобы выводились последовательно
-        std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
-        pr1->PrintStatistics();
-        std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
-        pr2->PrintStatistics();
-        std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
-        shower->PrintStatistics();
-        std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
-        receiver.PrintStatistics();
+        std::cout << "Write statistics: "; pr1->PrintStatistics();
+        std::cout << "Write statistics: "; pr2->PrintStatistics();
+        std::cout << "Console statistics: "; pr3->PrintStatistics();
+
+        receiver->PrintStatistics();
     }
     catch( const std::exception& e )
     {
