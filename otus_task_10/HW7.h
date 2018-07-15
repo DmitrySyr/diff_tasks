@@ -10,11 +10,14 @@
 #include <chrono>
 #include <thread>
 #include <exception>
+#include <experimental/filesystem>
 
 #include "Queue.h"
 
 #define STRING_MAX_SIZE 50
 #define MAX_BLOCK_SIZE 50
+
+namespace fs = std::experimental::filesystem;
 
 enum class State{
     ProcessData
@@ -205,6 +208,11 @@ public:
         ++AllBlocks;
         AllCommands += countCommands( data );
 
+        if( fs::space( fs::current_path() ).free < sizeof( str.c_str() ) )
+        {
+            throw std::runtime_error( "There is no free space available." );
+        }
+
         for( auto it = processors.begin(); it != processors.end(); )
         {
             auto ptr = (*it).lock();
@@ -220,6 +228,9 @@ public:
         }
         time = 0;
     }
+
+// ******************************************************************************
+
 };
 
 

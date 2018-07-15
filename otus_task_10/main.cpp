@@ -9,6 +9,8 @@
 #include "Queue.h"
 #include "Processor.h"
 
+
+
 int main( int argc, char* argv[] )
 {
 
@@ -20,6 +22,8 @@ int main( int argc, char* argv[] )
 
     try
     {
+        std::vector<std::exception_ptr> exc;
+
         // Инициализируем основной объект для получения и распределения данных
         auto receiver = std::make_shared<ReceivingBulk>( std::cout );
 
@@ -35,9 +39,9 @@ int main( int argc, char* argv[] )
         receiver->AddProcessor( logger );
         receiver->AddProcessor( shower );
 
-        auto pr1 = std::make_shared<Processor>( LineToDisk );
-        auto pr2 = std::make_shared<Processor>( LineToDisk );
-        auto pr3 = std::make_shared<Processor>( LineToConsole );
+        auto pr1 = std::make_shared<Processor>( LineToDisk, exc );
+        auto pr2 = std::make_shared<Processor>( LineToDisk, exc );
+        auto pr3 = std::make_shared<Processor>( LineToConsole, exc );
 
         std::thread th1( &Processor::Loop, pr1 );
         std::thread th2( &Processor::Loop, pr2 );
@@ -58,6 +62,15 @@ int main( int argc, char* argv[] )
             th3.join();
 
             std::cout << e.what();
+
+            if( !exc.empty() )
+            {
+                std::rethrow_exception( exc.front() );
+            }
+            else
+            {
+                throw std::runtime_error( "" );
+            }
         }
 
 
@@ -78,6 +91,7 @@ int main( int argc, char* argv[] )
     catch( const std::exception& e )
     {
         std::cout << e.what();
+        return 1;
     }
 
     return 0;

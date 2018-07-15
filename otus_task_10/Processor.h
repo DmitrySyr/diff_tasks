@@ -17,6 +17,8 @@
 
 class Processor{
 
+    std::vector<std::exception_ptr>& exc;
+
     std::ostream& out = std::cout;
     bool tests = false;
 
@@ -50,8 +52,10 @@ public:
     std::shared_ptr<Queue> line;
     std::vector<std::string> filesForTesting{};
 
-    Processor( std::shared_ptr<Queue> queue_obj, std::ostream& out = std::cout, bool tests = false ) :
-        line( queue_obj ), out( out ), tests( tests ), data({}), time( 0 ), state( RequestType::WriteToConsole ) {}
+    Processor( std::shared_ptr<Queue> queue_obj, std::vector<std::exception_ptr>& exc
+              , std::ostream& out = std::cout, bool tests = false ) :
+        line( queue_obj ), exc( exc ), out( out ), tests( tests )
+        , data({}), time( 0 ), state( RequestType::WriteToConsole ) {}
 
     Processor() = delete;
     Processor( const Processor& ) = delete;
@@ -82,11 +86,11 @@ public:
         ++BlocksQuantity;
         CommandsQuantity += countCommands();
 
-        file << "bulk: " << data;
+        file << "bulk: " << data << std::endl;
 
         if( file.fail() )
         {
-            throw std::runtime_error( "Can't write to file.\n" );
+            throw std::runtime_error( "Can't write to disk.\n" );
         }
 
         file.close();
@@ -130,20 +134,28 @@ public:
         {
             line->pop( state, data, time );
             {
-                switch( state )
+                try
                 {
-                    case RequestType::WriteToDisk :
-                        ImplementOutputFile( );
-                        break;
+                    switch( state )
+                    {
+                        case RequestType::WriteToDisk :
+                            ImplementOutputFile( );
+                            break;
 
-                    case RequestType::WriteToConsole :
-                        ImplementOutputConsole();
-                        break;
+                        case RequestType::WriteToConsole :
+                            ImplementOutputConsole();
+                            break;
 
-                    case RequestType::Quit :
-                        ToQuitOrNotToQuit = false;
-                        break;
+                        case RequestType::Quit :
+                            ToQuitOrNotToQuit = false;
+                            break;
+                    }
                 }
+                catch(...)
+                {
+                    exc.push_back( std::current_exception() );
+                }
+
             }
         }
     }

@@ -8,3 +8,5 @@
 
 #include "../HW7.h"
 #include "../Processor.h"
+
+extern std::vector<std::exception_ptr> exc;

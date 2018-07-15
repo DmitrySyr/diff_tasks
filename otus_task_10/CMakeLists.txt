@@ -36,6 +36,8 @@ set_target_properties(bulkmt lib PROPERTIES
   COMPILE_OPTIONS -Wpedantic -Wall -Wextra
 )
 
+SET( CMAKE_EXE_LINKER_FLAGS  "-lstdc++fs" )
+
 install(TARGETS bulkmt RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)

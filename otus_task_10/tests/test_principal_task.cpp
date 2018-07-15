@@ -4,10 +4,13 @@
 
 #include "test_header.h"
 
+
 BOOST_AUTO_TEST_SUITE ( principal_task )
 
 void test_helper_shower( std::istream& in, std::ostream& out, std::string n )
 {
+
+    std::vector<std::exception_ptr> exc;
     auto receiver = std::make_shared<ReceivingBulk>( std::cout );
 
     // Инициализируем очередь для потоков под запись в файл
@@ -21,9 +24,9 @@ void test_helper_shower( std::istream& in, std::ostream& out, std::string n )
 
     receiver->AddProcessor( shower );
 
-    auto pr1 = std::make_shared<Processor>( LineToDisk );
-    auto pr2 = std::make_shared<Processor>( LineToDisk );
-    auto pr3 = std::make_shared<Processor>( LineToConsole, out );
+    auto pr1 = std::make_shared<Processor>( LineToDisk, exc );
+    auto pr2 = std::make_shared<Processor>( LineToDisk, exc );
+    auto pr3 = std::make_shared<Processor>( LineToConsole, exc, out );
 
     std::thread th1( &Processor::Loop, pr1 );
     std::thread th2( &Processor::Loop, pr2 );
