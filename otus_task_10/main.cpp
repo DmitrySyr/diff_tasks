@@ -8,6 +8,7 @@
 #include "HW7.h"
 #include "Queue.h"
 #include "Processor.h"
+#include "thread_wrapper.h"
 
 
 
@@ -43,44 +44,40 @@ int main( int argc, char* argv[] )
         auto pr2 = std::make_shared<Processor>( LineToDisk, exc );
         auto pr3 = std::make_shared<Processor>( LineToConsole, exc );
 
-        std::thread th1( &Processor::Loop, pr1 );
-        std::thread th2( &Processor::Loop, pr2 );
-        std::thread th3( &Processor::Loop, pr3 );
+        {
+            std::vector<thread_wrapper> threads;
+            threads.push_back( std::move( thread_wrapper( std::thread( &Processor::Loop, pr1 ) ) ) );
+            threads.push_back( std::move( thread_wrapper( std::thread( &Processor::Loop, pr2 ) ) ) );
+            threads.push_back( std::move( thread_wrapper( std::thread( &Processor::Loop, pr3 ) ) ) );
 
-        try
-        {
-            receiver->MainLoop( argv[1], std::cin );
-        }
-        catch( std::exception& e )
-        {
+            try
+            {
+                receiver->MainLoop( argv[1], std::cin );
+            }
+            catch( std::exception& e )
+            {
+                LineToDisk->push( RequestType::Quit, std::string{}, 0 );
+                LineToDisk->push( RequestType::Quit, std::string{}, 0 );
+                LineToConsole->push( RequestType::Quit, std::string{}, 0 );
+
+                std::cout << e.what();
+
+                if( !exc.empty() )
+                {
+                    std::rethrow_exception( exc.front() );
+                }
+                else
+                {
+                    throw std::runtime_error( "" );
+                }
+            }
+
+
             LineToDisk->push( RequestType::Quit, std::string{}, 0 );
             LineToDisk->push( RequestType::Quit, std::string{}, 0 );
             LineToConsole->push( RequestType::Quit, std::string{}, 0 );
-
-            th1.join();
-            th2.join();
-            th3.join();
-
-            std::cout << e.what();
-
-            if( !exc.empty() )
-            {
-                std::rethrow_exception( exc.front() );
-            }
-            else
-            {
-                throw std::runtime_error( "" );
-            }
         }
 
-
-        LineToDisk->push( RequestType::Quit, std::string{}, 0 );
-        LineToDisk->push( RequestType::Quit, std::string{}, 0 );
-        LineToConsole->push( RequestType::Quit, std::string{}, 0 );
-
-        th1.join();
-        th2.join();
-        th3.join();
 
         std::cout << "Write statistics: "; pr1->PrintStatistics();
         std::cout << "Write statistics: "; pr2->PrintStatistics();
