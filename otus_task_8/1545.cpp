@@ -6,6 +6,9 @@
 #include <map>
 
 
+
+
+
 int main() {
 
 
@@ -27,8 +30,10 @@ int main() {
 
    while( !dict[seeking_symbol].empty() )
    {
-       std::cout << seeking_symbol << dict[seeking_symbol].back() << "\n";
-       dict[seeking_symbol].pop_back();
+       for( const auto& s : dict[seeking_symbol] )
+       {
+           std::cout << seeking_symbol << s << "\n";
+       }
    }
 
    return 0;

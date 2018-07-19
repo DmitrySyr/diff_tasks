@@ -23,11 +23,7 @@ int main() {
    {
        std::string input;
        std::cin >> input;
-        if( dict.find( input ) == dict.end() )
-        {
-            dict.insert( input );
-        }
-        else
+        if( dict.insert( input ).second == false )
         {
             result.insert( input );
         }
