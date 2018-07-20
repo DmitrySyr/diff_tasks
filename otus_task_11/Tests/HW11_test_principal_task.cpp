@@ -23,10 +23,10 @@ BOOST_AUTO_TEST_CASE ( single_input )
     std::string in{ "cmd1\ncmd2\ncmd3\ncmd4\ncmd5\n" };
 
     handler.proceed( h, in.c_str(), 25 );
+    std::this_thread::sleep_for( std::chrono::milliseconds( 500 ) );
 
     std::string result{"bulk: cmd1, cmd2\nbulk: cmd3, cmd4\nbulk: cmd5\n"};
 
-    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
     BOOST_CHECK_EQUAL ( ss_out.str(), result );
 }
 
@@ -57,6 +57,7 @@ BOOST_AUTO_TEST_CASE ( check_multi_calls )
 
     handler.proceed( h, ss_in.str().c_str(), 39 );
     handler.proceed( h, ss_in_II.str().c_str(), 18 );
+    std::this_thread::sleep_for( std::chrono::milliseconds( 500 ) );
 
     std::string res{"bulk: cmd1, cmd2, cmd3\nbulk: cmd4, cmd5, cmd6, cmd7\nbulk: dd1, dd2,"
                     " dd3\n"};
@@ -88,8 +89,7 @@ BOOST_AUTO_TEST_CASE ( test_parentnesis )
 
     handler.proceed( h, ss_in.str().c_str(), 34 );
 
-    std::this_thread::sleep_for( std::chrono::milliseconds( 10 ) );
-
+    std::this_thread::sleep_for( std::chrono::milliseconds( 500 ) );
     BOOST_CHECK_EQUAL ( ss_out.str(), "bulk: cmd1, cmd2\nbulk: cmd3, cmd4\nbulk: cmd5, cmd6\n" );
 }
 
@@ -115,7 +115,7 @@ BOOST_AUTO_TEST_CASE ( check_multi_input )
     handler.proceed( h1, thlow_I_II.c_str(), 10 );
     handler.proceed( h2, thlow_II_I.c_str(), 19 );
 
-    std::this_thread::sleep_for( std::chrono::milliseconds( 20 ) );
+    std::this_thread::sleep_for( std::chrono::milliseconds( 500 ) );
 
     std::string out = ss_out.str();
     std::sort( out.begin(), out.end() );
