@@ -35,7 +35,7 @@ set_target_properties(async PROPERTIES
   COMPILE_OPTIONS -Wpedantic -Wall -Wextra
 )
 
-install(TARGETS async RUNTIME DESTINATION bin)
+install(TARGETS async LIBRARY DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 
