@@ -11,8 +11,10 @@ project(BulkServer VERSION 0.0.${VERSION_BUILD} LANGUAGES CXX)
 #set (PROJECT_VERSION_PATCH "1.0")
 set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 
-find_package(Boost COMPONENTS system thread unit_test_framework REQUIRED)
+find_package(Boost REQUIRED)
 find_package(Threads)
+find_library(boost_coroutines libboost_coroutine.so)
+find_library(boost_system libboost_system.so)
 
 # configure a header file to pass some of the CMake settings
 # to the source code
@@ -27,7 +29,7 @@ add_executable(bulk_server main.cpp)
 
 add_library(bulk_server_lib Client.h Client.cpp StartTask.h H12.h Processor.h Queue.h thread_wrapper.h)
 
-target_link_libraries(bulk_server bulk_server_lib ${CMAKE_THREAD_LIBS_INIT} stdc++fs Boost::system Boost::coroutine)
+target_link_libraries(bulk_server bulk_server_lib ${CMAKE_THREAD_LIBS_INIT} stdc++fs ${boost_system} ${boost_coroutines})
 
 set_target_properties(bulk_server bulk_server_lib PROPERTIES
   CXX_STANDARD 14
