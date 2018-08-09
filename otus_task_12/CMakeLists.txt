@@ -11,7 +11,7 @@ project(BulkServer VERSION 0.0.${VERSION_BUILD} LANGUAGES CXX)
 #set (PROJECT_VERSION_PATCH "1.0")
 set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 
-find_package(Boost COMPONENTS system coroutine unit_test_framework REQUIRED)
+find_package(Boost REQUIRED)
 find_package(Threads)
 
 # configure a header file to pass some of the CMake settings

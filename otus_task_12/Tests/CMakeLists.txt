@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.2)
 
-find_package(Boost COMPONENTS system coroutine unit_test_framework REQUIRED)
+find_package(Boost REQUIRED)
 find_package(Threads)
 
 function(tests name)
