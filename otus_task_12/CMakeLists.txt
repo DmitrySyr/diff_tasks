@@ -13,8 +13,6 @@ set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 
 find_package(Boost REQUIRED)
 find_package(Threads)
-find_library(boost_coroutines libboost_coroutine.so)
-find_library(boost_system libboost_system.so)
 
 # configure a header file to pass some of the CMake settings
 # to the source code
@@ -29,7 +27,7 @@ add_executable(bulk_server main.cpp)
 
 add_library(bulk_server_lib Client.h Client.cpp StartTask.h H12.h Processor.h Queue.h thread_wrapper.h)
 
-target_link_libraries(bulk_server bulk_server_lib ${CMAKE_THREAD_LIBS_INIT} stdc++fs ${boost_system} ${boost_coroutines})
+target_link_libraries(bulk_server bulk_server_lib ${CMAKE_THREAD_LIBS_INIT} stdc++fs boost_coroutine)
 
 set_target_properties(bulk_server bulk_server_lib PROPERTIES
   CXX_STANDARD 14
@@ -40,7 +38,7 @@ set_target_properties(bulk_server bulk_server_lib PROPERTIES
   COMPILE_OPTIONS -Wpedantic -Wall -Wextra
 )
 
-SET( CMAKE_EXE_LINKER_FLAGS  "-lstdc++fs -pthread" )
+SET( CMAKE_EXE_LINKER_FLAGS  "-lstdc++fs -pthread -lboost_coroutine" )
 
 install(TARGETS bulk_server RUNTIME DESTINATION bin)
 
