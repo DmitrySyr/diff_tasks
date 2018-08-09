@@ -11,11 +11,8 @@ project(BulkServer VERSION 0.0.${VERSION_BUILD} LANGUAGES CXX)
 #set (PROJECT_VERSION_PATCH "1.0")
 set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 
-find_package(Boost REQUIRED)
+find_package(Boost COMPONENTS system thread unit_test_framework REQUIRED)
 find_package(Threads)
-
-include_directories(${Boost_INCLUDE_DIR})
-link_directories(${Boost_LIBRARY_DIRS})
 
 # configure a header file to pass some of the CMake settings
 # to the source code
@@ -30,7 +27,9 @@ add_executable(bulk_server main.cpp)
 
 add_library(bulk_server_lib Client.h Client.cpp StartTask.h H12.h Processor.h Queue.h thread_wrapper.h)
 
-target_link_libraries(bulk_server bulk_server_lib ${CMAKE_THREAD_LIBS_INIT} stdc++fs)
+target_link_libraries(bulk_server bulk_server_lib ${CMAKE_THREAD_LIBS_INIT} stdc++fs ${Boost_LIBRARIES})
+target_include_directories(bulk_server ${Boost_INCLUDE_DIR})
+target_include_directories(bulk_server_lib ${Boost_INCLUDE_DIR})
 
 set_target_properties(bulk_server bulk_server_lib PROPERTIES
   CXX_STANDARD 14
@@ -53,8 +52,8 @@ set(CPACK_PACKAGE_CONTACT dmitry.syr@gmail.com)
 
 include (CPack)
 
-enable_testing()
+#enable_testing()
 
-add_subdirectory(Tests)
+#add_subdirectory(Tests)
 
 MESSAGE(STATUS "!!!!! BOOST LIBS LIST: ${Boost_LIBRARIES}")
