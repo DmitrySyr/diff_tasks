@@ -1,7 +1,10 @@
 cmake_minimum_required(VERSION 3.2)
 
-find_package(Boost REQUIRED)
+find_package(Boost COMPONENTS system unit_test_framework REQUIRED)
 find_package(Threads)
+
+include_directories(${Boost_INCLUDE_DIR})
+link_directories(${Boost_LIBRARY_DIRS})
 
 function(tests name)
   add_executable (${name} ${name}.cpp)
@@ -15,7 +18,7 @@ function(tests name)
 
   target_include_directories(${name} PRIVATE ${PROJECT_SOURCE_DIR})
   target_link_libraries(${name} ${CMAKE_THREAD_LIBS_INIT} stdc++fs)
-  target_link_libraries (${name} ${Boost_LIBRARIES} bulk_server_lib)
+  target_link_libraries (${name} ${Boost_LIBRARY_DIRS} bulk_server_lib)
   add_test(${name} ${name})
 endfunction(tests)
 
