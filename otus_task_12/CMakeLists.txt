@@ -33,10 +33,12 @@ set_target_properties(bulk_server bulk_server_lib PROPERTIES
   CXX_STANDARD 14
   CXX_STANDARD_REQUIRED ON
   LINKER_LANGUAGE CXX
-  LINKER_FLAGS -lstdc++fs -pthread
+  #LINKER_FLAGS -lstdc++fs
   COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
   COMPILE_OPTIONS -Wpedantic -Wall -Wextra
 )
+
+SET( CMAKE_EXE_LINKER_FLAGS  "-lstdc++fs -pthread" )
 
 install(TARGETS bulk_server RUNTIME DESTINATION bin)
 

@@ -9,16 +9,17 @@ link_directories(${Boost_LIBRARY_DIRS})
 function(tests name)
   add_executable (${name} ${name}.cpp)
 
-  
 
   set_target_properties(${name} PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
     LINKER_LANGUAGE CXX
-    LINKER_FLAGS -lstdc++fs
+    #LINKER_FLAGS -lstdc++fs
     COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
     COMPILE_OPTIONS -Wpedantic -Wall -Wextra
   )
+
+  SET( CMAKE_EXE_LINKER_FLAGS  "-lstdc++fs -pthread" )
 
   target_include_directories(${name} PRIVATE ${PROJECT_SOURCE_DIR})
   target_link_libraries(${name} ${CMAKE_THREAD_LIBS_INIT} stdc++fs)
