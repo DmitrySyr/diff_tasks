@@ -15,10 +15,9 @@ function(tests name)
 
   target_include_directories(${name} PRIVATE ${PROJECT_SOURCE_DIR})
   target_link_libraries(${name} ${CMAKE_THREAD_LIBS_INIT} stdc++fs)
-  target_link_libraries (${name} Boost::unit_test_framework ${Boost_LIBRARIES} bulk_server_lib)
+  target_link_libraries (${name} ${Boost_LIBRARIES} bulk_server_lib)
   add_test(${name} ${name})
 endfunction(tests)
 
 tests(test_bulk)
-tests(HW11_test_output)
 tests(test_wrong)
