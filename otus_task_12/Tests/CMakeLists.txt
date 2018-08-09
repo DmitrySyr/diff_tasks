@@ -22,7 +22,7 @@ function(tests name)
 
   target_include_directories(${name} PRIVATE ${PROJECT_SOURCE_DIR})
   target_link_libraries(${name} ${CMAKE_THREAD_LIBS_INIT} stdc++fs)
-  target_link_libraries (${name} bulk_server_lib)
+  target_link_libraries (${name} Boost::unit_test_framework bulk_server_lib)
   add_test(${name} ${name})
 endfunction(tests)
 

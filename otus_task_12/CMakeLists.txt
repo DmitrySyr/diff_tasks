@@ -27,13 +27,13 @@ add_executable(bulk_server main.cpp)
 
 add_library(bulk_server_lib Client.h Client.cpp StartTask.h H12.h Processor.h Queue.h thread_wrapper.h)
 
-target_link_libraries(bulk_server bulk_server_lib ${CMAKE_THREAD_LIBS_INIT} stdc++fs)
+target_link_libraries(bulk_server bulk_server_lib ${CMAKE_THREAD_LIBS_INIT} stdc++fs Boost::coroutine Boost::system)
 
 set_target_properties(bulk_server bulk_server_lib PROPERTIES
   CXX_STANDARD 14
   CXX_STANDARD_REQUIRED ON
   LINKER_LANGUAGE CXX
-  LINKER_FLAGS -lstdc++fs
+  LINKER_FLAGS -lstdc++fs -pthread
   COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
   COMPILE_OPTIONS -Wpedantic -Wall -Wextra
 )
