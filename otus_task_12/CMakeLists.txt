@@ -25,9 +25,9 @@ configure_file (
 
 add_executable(bulk_server main.cpp)
 
-add_library(bulk_server_lib Client.h Client.cpp StartTask.h HW12.h Processor.h Queue.h thread_wrapper.h )
+add_library(bulk_server_lib Client.h Client.cpp StartTask.h H12.h Processor.h Queue.h thread_wrapper.h )
 
-target_link_libraries(bulk_server bulk_server_lib ${CMAKE_THREAD_LIBS_INIT} stdc++fs)
+target_link_libraries(bulk_server bulk_server_lib ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} stdc++fs)
 
 set_target_properties(bulk_server PROPERTIES
   CXX_STANDARD 14
